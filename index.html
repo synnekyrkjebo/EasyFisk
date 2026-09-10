@@ -1,13 +1,98 @@
 <!doctype html>
 <html lang="no">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-    <meta name="theme-color" content="#064e3b" />
-    <title>EasyFisk – Mandalselva</title>
-  </head>
-  <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.tsx"></script>
-  </body>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#07513d">
+  <meta name="description" content="EasyFisk – fiskesoner i Mandalselva">
+  <title>EasyFisk – Mandalselva</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="phone">
+    <header class="header">
+      <div class="brand">
+        <span class="brand-mark" aria-hidden="true">≈</span>
+        <h1>Mandalselva</h1>
+      </div>
+      <button class="icon-button" aria-label="Varsler">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 7-3 9h18c0-2-3-2-3-9M10 21h4"/></svg>
+      </button>
+    </header>
+
+    <main class="map" aria-label="Kart over fiskesoner i Mandalselva">
+      <div class="terrain terrain-a"></div>
+      <div class="terrain terrain-b"></div>
+      <div class="terrain terrain-c"></div>
+
+      <svg class="map-lines" viewBox="0 0 390 690" preserveAspectRatio="none" aria-hidden="true">
+        <path class="road major" d="M-15 105 C85 130 162 104 405 152"/>
+        <path class="road" d="M-8 254 C83 225 157 270 402 240"/>
+        <path class="road" d="M15 500 C120 455 240 525 405 475"/>
+        <path class="border" d="M0 185 H390 M0 355 H390 M0 545 H390"/>
+        <path class="river-shadow" d="M209 -15 C190 60 230 93 196 151 C168 205 225 245 193 300 C157 361 213 406 173 470 C139 525 177 579 143 704"/>
+        <path class="river" d="M209 -15 C190 60 230 93 196 151 C168 205 225 245 193 300 C157 361 213 406 173 470 C139 525 177 579 143 704"/>
+      </svg>
+
+      <span class="place p1">Sveindal</span>
+      <span class="place p2">Bjelland</span>
+      <span class="place p3">Mannflå</span>
+      <span class="place p4">Laudal<br>kraftverk</span>
+      <span class="place p5">Marnardal</span>
+      <span class="place p6">Øyslebø</span>
+      <span class="place p7">Holum</span>
+      <span class="place p8">Mandal</span>
+
+      <button class="pin pin-1" aria-label="Mandal"></button>
+      <button class="pin pin-2" aria-label="Holum"></button>
+      <button class="pin pin-3" aria-label="Øyslebø"></button>
+      <button class="pin pin-4" aria-label="Marnardal"></button>
+      <button class="pin pin-5" aria-label="Mannflå"></button>
+      <button class="pin pin-6" aria-label="Bjelland"></button>
+      <button class="pin pin-7" aria-label="Sveindal"></button>
+
+      <button class="zone zone-4" data-zone="Sone 4">Sone 4</button>
+      <button class="zone zone-3" data-zone="Sone 3">Sone 3</button>
+      <button class="zone zone-2" data-zone="Sone 2">Sone 2</button>
+      <button class="zone zone-1" data-zone="Sone 1">Sone 1</button>
+
+      <button class="location-button" aria-label="Finn min posisjon">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M5 5l2 2M17 17l2 2M19 5l-2 2M7 17l-2 2"/></svg>
+      </button>
+
+      <aside class="zone-card" id="zone-card" aria-live="polite">
+        <button class="close-card" aria-label="Lukk">×</button>
+        <span class="card-icon">≈</span>
+        <div>
+          <strong id="zone-title">Sone 2</strong>
+          <p>Holum–Øyslebø</p>
+          <span class="open-badge">Åpen for fiske</span>
+        </div>
+        <button class="primary-button">Kjøp fiskekort</button>
+      </aside>
+    </main>
+
+    <nav class="bottom-nav" aria-label="Hovedmeny">
+      <a href="#kart" class="nav-item active" data-page="Kart">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m3 6 5-3 8 3 5-3v15l-5 3-8-3-5 3zM8 3v15M16 6v15"/></svg>
+        <span>Kart</span>
+      </a>
+      <a href="#fiskekort" class="nav-item" data-page="Fiskekort">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 6h18v4a2 2 0 0 0 0 4v4H3v-4a2 2 0 0 0 0-4zM8 9v6"/></svg>
+        <span>Fiskekort</span>
+      </a>
+      <a href="#fangst" class="nav-item" data-page="Fangst">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 12c4-5 10-6 15-2l3-3v10l-3-3c-5 4-11 3-15-2z"/><circle cx="15" cy="11" r=".7"/></svg>
+        <span>Fangst</span>
+      </a>
+      <a href="#profil" class="nav-item" data-page="Profil">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/></svg>
+        <span>Profil</span>
+      </a>
+    </nav>
+
+    <div class="toast" id="toast" role="status"></div>
+  </div>
+  <script src="script.js"></script>
+</body>
 </html>

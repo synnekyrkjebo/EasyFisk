@@ -1,12 +1,55 @@
 const zoneCard = document.querySelector("#zone-card");
-const zoneTitle = document.querySelector("#zone-title");
 const closeCard = document.querySelector(".close-card");
 const locationButton = document.querySelector(".location-button");
-const phone = document.querySelector(".phone");
+
+const zoneInfo = {
+  "Sone 1": {
+    area: "Mandal–Holum",
+    status: "Åpen for fiske",
+    catches: 37,
+    salmon: 23,
+    trout: 14,
+    rule: "Døgnkvote: 1 laks per fisker",
+  },
+  "Sone 2": {
+    area: "Holum–Øyslebø",
+    status: "Åpen for fiske",
+    catches: 42,
+    salmon: 28,
+    trout: 14,
+    rule: "Døgnkvote: 1 laks per fisker",
+  },
+  "Sone 3": {
+    area: "Øyslebø–Marnardal",
+    status: "Åpen for fiske",
+    catches: 31,
+    salmon: 19,
+    trout: 12,
+    rule: "Husk gyldig fiskekort og desinfiseringsbevis",
+  },
+  "Sone 4": {
+    area: "Marnardal–Sveindal",
+    status: "Åpen for fiske",
+    catches: 24,
+    salmon: 15,
+    trout: 9,
+    rule: "Kontroller lokale regler før fisket starter",
+  },
+};
 
 document.querySelectorAll(".zone").forEach((button) => {
   button.addEventListener("click", () => {
-    zoneTitle.textContent = button.dataset.zone;
+    const name = button.dataset.zone;
+    const info = zoneInfo[name];
+
+    document.querySelector("#zone-title").textContent = name;
+    document.querySelector("#zone-area").textContent = info.area;
+    document.querySelector("#zone-status").textContent = info.status;
+    document.querySelector("#zone-catches").textContent = info.catches;
+    document.querySelector("#zone-salmon").textContent = info.salmon;
+    document.querySelector("#zone-trout").textContent = info.trout;
+    document.querySelector("#zone-rule").textContent = info.rule;
+
     zoneCard.classList.add("show");
     locationButton.hidden = true;
   });
@@ -15,35 +58,4 @@ document.querySelectorAll(".zone").forEach((button) => {
 closeCard.addEventListener("click", () => {
   zoneCard.classList.remove("show");
   locationButton.hidden = false;
-});
-
-function showToast(message) {
-  let toast = document.querySelector(".toast");
-
-  if (!toast) {
-    toast = document.createElement("div");
-    toast.className = "toast";
-    toast.setAttribute("role", "status");
-    phone.appendChild(toast);
-  }
-
-  toast.textContent = message;
-  toast.classList.add("show");
-  window.clearTimeout(showToast.timeout);
-  showToast.timeout = window.setTimeout(() => toast.classList.remove("show"), 2200);
-}
-
-locationButton.addEventListener("click", () => {
-  showToast("Posisjonen din vises her senere");
-});
-
-document.querySelectorAll(".nav-item").forEach((item) => {
-  item.addEventListener("click", (event) => {
-    const label = item.querySelector("span").textContent;
-
-    if (label !== "Kart") {
-      event.preventDefault();
-      showToast(label + " bygger vi som neste side");
-    }
-  });
 });

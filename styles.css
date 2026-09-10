@@ -388,3 +388,51 @@ button:focus-visible, a:focus-visible {
 @media (prefers-reduced-motion: reduce) {
   .toast { transition: none; }
 }
+
+
+.zone-heading {
+  min-width: 0;
+  padding-right: 24px;
+}
+
+.zone-stats {
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  margin-top: 5px;
+  overflow: hidden;
+  background: #f4f6f3;
+  border: 1px solid #e1e6e2;
+  border-radius: 9px;
+}
+
+.zone-stats div {
+  display: grid;
+  gap: 3px;
+  padding: 10px 6px;
+  text-align: center;
+}
+
+.zone-stats div + div {
+  border-left: 1px solid #dde3de;
+}
+
+.zone-stats span {
+  color: #64706a;
+  font-size: 10px;
+}
+
+.zone-stats strong {
+  color: #173f33;
+  font-size: 18px;
+}
+
+.zone-rule {
+  grid-column: 1 / -1;
+  margin: 0;
+  padding: 9px 10px;
+  color: #46534d;
+  background: #edf1eb;
+  border-radius: 7px;
+  font-size: 11px;
+}

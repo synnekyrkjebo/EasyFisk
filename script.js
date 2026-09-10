@@ -2,30 +2,30 @@ const zoneCard = document.querySelector("#zone-card");
 const closeCard = document.querySelector(".close-card");
 
 const fishingPlaces = [
-  { zone: "Sone 1", name: "Sandnes fiskeri", area: "Nedre Mandalselva", lat: 58.020, lng: 7.462 },
-  { zone: "Sone 1", name: "Piren med flere", area: "Nedre Mandalselva", lat: 58.044, lng: 7.475 },
-  { zone: "Sone 2", name: "Bringsdal", area: "Mandal–Holum", lat: 58.069, lng: 7.489 },
-  { zone: "Sone 2", name: "Furuholmen", area: "Mandal–Holum", lat: 58.089, lng: 7.500 },
-  { zone: "Sone 2", name: "Smeland", area: "Mandal–Holum", lat: 58.109, lng: 7.508 },
-  { zone: "Sone 2", name: "Bjørkenes", area: "Mandal–Holum", lat: 58.129, lng: 7.521 },
-  { zone: "Sone 2", name: "Fuskeland", area: "Mandal–Holum", lat: 58.149, lng: 7.530 },
-  { zone: "Sone 2", name: "Fossefjellene", area: "Mandal–Holum", lat: 58.169, lng: 7.539 },
-  { zone: "Sone 2", name: "Øvre Holum", area: "Marnardal–Holum", lat: 58.189, lng: 7.548 },
-  { zone: "Sone 2", name: "Heia", area: "Marnardal–Holum", lat: 58.209, lng: 7.557 },
-  { zone: "Sone 2", name: "Holmegård", area: "Marnardal–Holum", lat: 58.229, lng: 7.566 },
-  { zone: "Sone 2", name: "Møll", area: "Marnardal–Holum", lat: 58.249, lng: 7.575 },
-  { zone: "Sone 2", name: "Nedre Holum", area: "Marnardal–Holum", lat: 58.269, lng: 7.584 },
-  { zone: "Sone 2", name: "Nedre Nødig", area: "Marnardal–Holum", lat: 58.289, lng: 7.593 },
-  { zone: "Sone 2", name: "Stoveland og Grimefossen", area: "Marnardal–Holum", lat: 58.309, lng: 7.602 },
-  { zone: "Sone 3", name: "Mandalselva Sone 3", area: "Marnardal", lat: 58.335, lng: 7.612 },
-  { zone: "Sone 4", name: "Felles Nord Manflåvann", area: "Manflåvann", lat: 58.365, lng: 7.621 },
-  { zone: "Sone 4", name: "Laksehylen", area: "Øvre del av Mandalselva", lat: 58.390, lng: 7.629 },
-  { zone: "Sone 4", name: "Lakseosen", area: "Øvre del av Mandalselva", lat: 58.415, lng: 7.637 },
-  { zone: "Sone 4", name: "Strædethylen", area: "Øvre del av Mandalselva", lat: 58.440, lng: 7.645 },
-  { zone: "Sone 4", name: "Nodehylen", area: "Øvre del av Mandalselva", lat: 58.465, lng: 7.653 },
-  { zone: "Sone 4", name: "Bjåhylen", area: "Øvre del av Mandalselva", lat: 58.490, lng: 7.661 },
-  { zone: "Sone 4", name: "Steinshylen", area: "Øvre del av Mandalselva", lat: 58.515, lng: 7.669 },
-  { zone: "Sone 4", name: "Klevelandfossen", area: "Øvre del av Mandalselva", lat: 58.540, lng: 7.677 },
+  { zone: "Sone 1", name: "Sandnes fiskeri", area: "Nedre Mandalselva", lat: 58.028, lng: 7.459 },
+  { zone: "Sone 1", name: "Piren med flere", area: "Nedre Mandalselva", lat: 58.052, lng: 7.482 },
+  { zone: "Sone 2", name: "Bringsdal", area: "Mandal–Holum", lat: 58.072, lng: 7.505 },
+  { zone: "Sone 2", name: "Furuholmen", area: "Mandal–Holum", lat: 58.087, lng: 7.516 },
+  { zone: "Sone 2", name: "Smeland", area: "Mandal–Holum", lat: 58.1, lng: 7.525 },
+  { zone: "Sone 2", name: "Bjørkenes", area: "Mandal–Holum", lat: 58.114, lng: 7.529 },
+  { zone: "Sone 2", name: "Fuskeland", area: "Mandal–Holum", lat: 58.13, lng: 7.535 },
+  { zone: "Sone 2", name: "Fossefjellene", area: "Mandal–Holum", lat: 58.147, lng: 7.544 },
+  { zone: "Sone 2", name: "Øvre Holum", area: "Marnardal–Holum", lat: 58.164, lng: 7.552 },
+  { zone: "Sone 2", name: "Heia", area: "Marnardal–Holum", lat: 58.179, lng: 7.545 },
+  { zone: "Sone 2", name: "Holmegård", area: "Marnardal–Holum", lat: 58.194, lng: 7.532 },
+  { zone: "Sone 2", name: "Møll", area: "Marnardal–Holum", lat: 58.208, lng: 7.519 },
+  { zone: "Sone 2", name: "Nedre Holum", area: "Marnardal–Holum", lat: 58.222, lng: 7.508 },
+  { zone: "Sone 2", name: "Nedre Nødig", area: "Marnardal–Holum", lat: 58.237, lng: 7.503 },
+  { zone: "Sone 2", name: "Stoveland og Grimefossen", area: "Marnardal–Holum", lat: 58.252, lng: 7.503 },
+  { zone: "Sone 3", name: "Mandalselva Sone 3", area: "Marnardal", lat: 58.292, lng: 7.51 },
+  { zone: "Sone 4", name: "Felles Nord Manflåvann", area: "Manflåvann", lat: 58.35, lng: 7.518 },
+  { zone: "Sone 4", name: "Laksehylen", area: "Øvre del av Mandalselva", lat: 58.367, lng: 7.524 },
+  { zone: "Sone 4", name: "Lakseosen", area: "Øvre del av Mandalselva", lat: 58.384, lng: 7.528 },
+  { zone: "Sone 4", name: "Strædethylen", area: "Øvre del av Mandalselva", lat: 58.399, lng: 7.525 },
+  { zone: "Sone 4", name: "Nodehylen", area: "Øvre del av Mandalselva", lat: 58.414, lng: 7.522 },
+  { zone: "Sone 4", name: "Bjåhylen", area: "Øvre del av Mandalselva", lat: 58.429, lng: 7.52 },
+  { zone: "Sone 4", name: "Steinshylen", area: "Øvre del av Mandalselva", lat: 58.445, lng: 7.517 },
+  { zone: "Sone 4", name: "Klevelandfossen", area: "Øvre del av Mandalselva", lat: 58.462, lng: 7.514 },
 ];
 
 const map = L.map("map-canvas", {
@@ -39,18 +39,12 @@ L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
   attribution: "&copy; OpenStreetMap",
 }).addTo(map);
 
-const riverCoordinates = fishingPlaces.map((place) => [place.lat, place.lng]);
-L.polyline(riverCoordinates, {
-  color: "#35a6da",
-  weight: 5,
-  opacity: 0.85,
-}).addTo(map);
 
 const zoneLabels = [
-  { name: "Sone 1", lat: 58.050, lng: 7.535, className: "map-zone zone-label-1" },
-  { name: "Sone 2", lat: 58.205, lng: 7.635, className: "map-zone zone-label-2" },
-  { name: "Sone 3", lat: 58.335, lng: 7.680, className: "map-zone zone-label-3" },
-  { name: "Sone 4", lat: 58.475, lng: 7.735, className: "map-zone zone-label-4" },
+  { name: "Sone 1", lat: 58.058, lng: 7.575, className: "map-zone zone-label-1" },
+  { name: "Sone 2", lat: 58.175, lng: 7.615, className: "map-zone zone-label-2" },
+  { name: "Sone 3", lat: 58.292, lng: 7.585, className: "map-zone zone-label-3" },
+  { name: "Sone 4", lat: 58.405, lng: 7.585, className: "map-zone zone-label-4" },
 ];
 
 zoneLabels.forEach((zone) => {
@@ -98,6 +92,8 @@ fishingPlaces.forEach((place) => {
     zoneCard.classList.add("show");
   });
 });
+
+map.fitBounds(fishingPlaces.map((place) => [place.lat, place.lng]), { padding: [30, 30] });
 
 const locateControl = L.control({ position: "bottomright" });
 

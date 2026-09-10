@@ -6,6 +6,7 @@
   <meta name="theme-color" content="#07513d">
   <meta name="description" content="EasyFisk – fiskesoner i Mandalselva">
   <title>EasyFisk – Mandalselva</title>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -17,32 +18,8 @@
       </button>
     </header>
 
-    <main class="map" aria-label="Kart over fiskesoner i Mandalselva">
-      <div class="terrain terrain-a"></div><div class="terrain terrain-b"></div><div class="terrain terrain-c"></div>
-      <svg class="map-lines" viewBox="0 0 390 690" preserveAspectRatio="none" aria-hidden="true">
-        <path class="road major" d="M-15 105 C85 130 162 104 405 152"/>
-        <path class="road" d="M-8 254 C83 225 157 270 402 240"/>
-        <path class="road" d="M15 500 C120 455 240 525 405 475"/>
-        <path class="border" d="M0 185 H390 M0 355 H390 M0 545 H390"/>
-        <path class="river-shadow" d="M209 -15 C190 60 230 93 196 151 C168 205 225 245 193 300 C157 361 213 406 173 470 C139 525 177 579 143 704"/>
-        <path class="river" d="M209 -15 C190 60 230 93 196 151 C168 205 225 245 193 300 C157 361 213 406 173 470 C139 525 177 579 143 704"/>
-      </svg>
-
-      <span class="place p1">Sveindal</span><span class="place p2">Bjelland</span>
-      <span class="place p3">Mannflå</span><span class="place p4">Laudal<br>kraftverk</span>
-      <span class="place p5">Marnardal</span><span class="place p6">Øyslebø</span>
-      <span class="place p7">Holum</span><span class="place p8">Mandal</span>
-
-      <div id="fishing-markers" aria-label="Steder som selger fiskekort"></div>
-
-      <span class="zone zone-4">Sone 4</span>
-      <span class="zone zone-3">Sone 3</span>
-      <span class="zone zone-2">Sone 2</span>
-      <span class="zone zone-1">Sone 1</span>
-
-      <button class="location-button" aria-label="Finn min posisjon">
-        <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M5 5l2 2M17 17l2 2M19 5l-2 2M7 17l-2 2"/></svg>
-      </button>
+    <main class="map" aria-label="Interaktivt kart over fiskesoner i Mandalselva">
+      <div id="map-canvas"></div>
 
       <aside class="zone-card" id="zone-card" aria-live="polite">
         <button class="close-card" aria-label="Lukk">×</button>
@@ -76,6 +53,7 @@
       </a>
     </nav>
   </div>
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
   <script src="script.js"></script>
 </body>
 </html>

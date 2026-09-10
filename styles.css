@@ -484,3 +484,70 @@ button:focus-visible, a:focus-visible {
 #fishing-markers .pin {
   pointer-events: auto;
 }
+
+
+#map-canvas {
+  width: 100%;
+  height: 100%;
+  background: #e8ebdf;
+}
+
+.zone-card {
+  z-index: 1200;
+}
+
+.leaflet-control-zoom {
+  overflow: hidden;
+  border: 0 !important;
+  border-radius: 10px !important;
+  box-shadow: 0 3px 12px rgb(0 0 0 / 18%) !important;
+}
+
+.leaflet-control-zoom a {
+  color: #174c3c;
+}
+
+.map-location-button {
+  display: grid;
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  color: #174c3c;
+  cursor: pointer;
+  background: #fff;
+  border: 1px solid #d8ded9;
+  border-radius: 50%;
+  box-shadow: 0 4px 13px rgb(0 0 0 / 18%);
+  font-size: 25px;
+  place-items: center;
+}
+
+.map-zone {
+  display: grid;
+  width: 62px !important;
+  height: 30px !important;
+  margin: 0 !important;
+  color: #25322d;
+  border: 0;
+  border-radius: 8px;
+  box-shadow: 0 2px 9px rgb(46 61 53 / 15%);
+  font-size: 12px;
+  font-weight: 700;
+  place-items: center;
+}
+
+.zone-label-1 { background: #bcdcf0; }
+.zone-label-2 { background: #bed7c1; }
+.zone-label-3 { background: #edc7b8; }
+.zone-label-4 { background: #c9c3ec; }
+
+.leaflet-tooltip {
+  padding: 5px 8px;
+  color: #25322d;
+  border: 0;
+  border-radius: 6px;
+  box-shadow: 0 2px 8px rgb(0 0 0 / 15%);
+  font-family: inherit;
+  font-size: 11px;
+  font-weight: 650;
+}

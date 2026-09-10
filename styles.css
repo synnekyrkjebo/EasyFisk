@@ -219,6 +219,12 @@ button { font: inherit; }
   transform: rotate(-45deg);
 }
 
+.pin.selected {
+  z-index: 9;
+  background: #ef9f2f;
+  box-shadow: 0 0 0 4px rgb(239 159 47 / 28%), 0 2px 5px rgb(0 0 0 / 23%);
+}
+
 .pin::after {
   position: absolute;
   inset: 3px;
@@ -240,7 +246,7 @@ button { font: inherit; }
   z-index: 7;
   padding: 8px 12px;
   color: #25322d;
-  cursor: pointer;
+  pointer-events: none;
   border: 0;
   border-radius: 8px;
   box-shadow: 0 2px 9px rgb(46 61 53 / 12%);
@@ -435,4 +441,46 @@ button:focus-visible, a:focus-visible {
   background: #edf1eb;
   border-radius: 7px;
   font-size: 11px;
+}
+
+
+.card-eyebrow {
+  display: block;
+  margin-bottom: 2px;
+  color: #527066;
+  font-size: 11px;
+  font-weight: 750;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+}
+
+.marker-info {
+  grid-column: 1 / -1;
+  display: grid;
+  gap: 3px;
+  padding: 10px 11px;
+  background: #f1f4ef;
+  border-radius: 8px;
+}
+
+.marker-info span {
+  color: #68736e;
+  font-size: 10px;
+}
+
+.marker-info strong {
+  color: #25352f;
+  font-size: 12px;
+  line-height: 1.3;
+}
+
+#fishing-markers {
+  position: absolute;
+  z-index: 6;
+  inset: 0;
+  pointer-events: none;
+}
+
+#fishing-markers .pin {
+  pointer-events: auto;
 }

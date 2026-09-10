@@ -33,15 +33,12 @@
       <span class="place p5">Marnardal</span><span class="place p6">Øyslebø</span>
       <span class="place p7">Holum</span><span class="place p8">Mandal</span>
 
-      <button class="pin pin-1" aria-label="Mandal"></button><button class="pin pin-2" aria-label="Holum"></button>
-      <button class="pin pin-3" aria-label="Øyslebø"></button><button class="pin pin-4" aria-label="Marnardal"></button>
-      <button class="pin pin-5" aria-label="Mannflå"></button><button class="pin pin-6" aria-label="Bjelland"></button>
-      <button class="pin pin-7" aria-label="Sveindal"></button>
+      <div id="fishing-markers" aria-label="Steder som selger fiskekort"></div>
 
-      <button class="zone zone-4" data-zone="Sone 4">Sone 4</button>
-      <button class="zone zone-3" data-zone="Sone 3">Sone 3</button>
-      <button class="zone zone-2" data-zone="Sone 2">Sone 2</button>
-      <button class="zone zone-1" data-zone="Sone 1">Sone 1</button>
+      <span class="zone zone-4">Sone 4</span>
+      <span class="zone zone-3">Sone 3</span>
+      <span class="zone zone-2">Sone 2</span>
+      <span class="zone zone-1">Sone 1</span>
 
       <button class="location-button" aria-label="Finn min posisjon">
         <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M5 5l2 2M17 17l2 2M19 5l-2 2M7 17l-2 2"/></svg>
@@ -49,19 +46,18 @@
 
       <aside class="zone-card" id="zone-card" aria-live="polite">
         <button class="close-card" aria-label="Lukk">×</button>
-        <span class="card-icon">≈</span>
+        <span class="card-icon" aria-hidden="true">⌖</span>
         <div class="zone-heading">
-          <strong id="zone-title">Sone 2</strong>
-          <p id="zone-area">Holum–Øyslebø</p>
-          <span class="open-badge" id="zone-status">Åpen for fiske</span>
+          <span class="card-eyebrow" id="marker-zone">Sone 2</span>
+          <strong id="marker-name">Bringsdal</strong>
+          <p id="marker-area">Mandal–Holum</p>
+          <span class="open-badge">Fiskekort tilgjengelig</span>
         </div>
-        <div class="zone-stats" aria-label="Fangststatistikk">
-          <div><span>Fangster i år</span><strong id="zone-catches">42</strong></div>
-          <div><span>Laks</span><strong id="zone-salmon">28</strong></div>
-          <div><span>Sjøørret</span><strong id="zone-trout">14</strong></div>
+        <div class="marker-info">
+          <span>Fiskekort for valgt område</span>
+          <strong id="marker-product">Mandalselva Sone 2 – Bringsdal</strong>
         </div>
-        <p class="zone-rule" id="zone-rule">Døgnkvote: 1 laks per fisker</p>
-        <button class="primary-button">Kjøp fiskekort</button>
+        <button class="primary-button" id="buy-button">Kjøp fiskekort</button>
       </aside>
     </main>
 

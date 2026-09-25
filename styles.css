@@ -704,3 +704,27 @@ button:focus-visible, a:focus-visible {
     font-size: 7.4px;
   }
 }
+
+
+/* Final seven-column navigation layout */
+.bottom-nav {
+  display: grid;
+  grid-template-columns: repeat(7, minmax(0, 1fr)) !important;
+  grid-template-rows: 1fr;
+  align-items: stretch;
+}
+
+.bottom-nav > .nav-item {
+  grid-row: 1;
+  min-width: 0;
+  overflow: visible;
+  white-space: nowrap;
+}
+
+.nav-item--report {
+  grid-column: 4;
+}
+
+.report-button {
+  top: -42px;
+}

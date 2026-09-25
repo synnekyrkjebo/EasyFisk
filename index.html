@@ -12,7 +12,14 @@
 <body>
   <div class="phone">
     <header class="header">
-      <div class="brand"><h1>Mandalselva</h1></div>
+      <a class="brand" href="#" aria-label="EasyFisk – gå til kartet">
+        <svg class="brand-logo" viewBox="0 0 48 48" aria-hidden="true">
+          <path d="M8 25c5-8 13-12 23-10l8-5-2 10 6 6-9 1c-6 8-17 10-26 5l6-4-6-3Z"/>
+          <circle cx="31" cy="19" r="1.5"/>
+          <path d="M18 12c-2 6 0 12 5 16M12 37c4-1 8 0 11 3"/>
+        </svg>
+        <span>EasyFisk</span>
+      </a>
       <button class="icon-button" aria-label="Varsler">
         <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 7-3 9h18c0-2-3-2-3-9M10 21h4"/></svg>
       </button>
@@ -40,16 +47,28 @@
 
     <nav class="bottom-nav" aria-label="Hovedmeny">
       <a class="nav-item active" href="#" aria-current="page">
-        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m3 6 6-3 6 3 6-3v15l-6 3-6-3-6 3zM9 3v15M15 6v15"/></svg><span>Kart</span>
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s7-6 7-12a7 7 0 1 0-14 0c0 6 7 12 7 12Z"/><circle cx="12" cy="9" r="2.3"/></svg>
+        <span>Kart</span>
+      </a>
+      <a class="nav-item" href="#feed">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="8" cy="8" r="3"/><circle cx="17" cy="9" r="2.5"/><path d="M2 20c0-4 2.5-7 6-7s6 3 6 7M14 14c4-1 7 1.5 7 5"/></svg>
+        <span>Feed</span>
+      </a>
+      <a class="nav-item nav-item--report" href="#fangstrapport">
+        <span class="report-button" aria-hidden="true">+</span>
+        <span>Fangstrapport</span>
       </a>
       <a class="nav-item" href="#fiskekort">
-        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 6h18v4a2 2 0 0 0 0 4v4H3v-4a2 2 0 0 0 0-4zM13 6v12"/></svg><span>Fiskekort</span>
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 6h18v4a2 2 0 0 0 0 4v4H3v-4a2 2 0 0 0 0-4zM13 6v12"/></svg>
+        <span>Fiskekort</span>
       </a>
-      <a class="nav-item" href="#fangst">
-        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 12s4-5 10-5c4 0 7 5 7 5s-3 5-7 5c-6 0-10-5-10-5zM3 12 1 8v8z"/><circle cx="15" cy="11" r=".8"/></svg><span>Fangst</span>
+      <a class="nav-item" href="#fiskeregler">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3h9l4 4v14H6zM14 3v5h5M9 12h7M9 16h7"/></svg>
+        <span>Fiskeregler</span>
       </a>
-      <a class="nav-item" href="#profil">
-        <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/></svg><span>Profil</span>
+      <a class="nav-item" href="#min-side">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/></svg>
+        <span>Min side</span>
       </a>
     </nav>
   </div>

@@ -551,3 +551,119 @@ button:focus-visible, a:focus-visible {
   font-size: 11px;
   font-weight: 650;
 }
+
+
+/* EasyFisk header and main navigation */
+.phone {
+  grid-template-rows: 68px minmax(0, 1fr) 84px;
+}
+
+.header {
+  grid-template-columns: 1fr 48px;
+  padding: env(safe-area-inset-top, 0) 10px 0 18px;
+  color: #176b43;
+  background: rgb(255 255 255 / 98%);
+  border-bottom: 1px solid #e8ebe9;
+}
+
+.brand {
+  justify-self: start;
+  justify-content: flex-start;
+  gap: 7px;
+  padding-left: 0;
+  color: #176b43;
+  text-decoration: none;
+}
+
+.brand-logo {
+  width: 31px;
+  height: 31px;
+  fill: none;
+  stroke: currentColor;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 2.4;
+}
+
+.brand span {
+  font-size: 20px;
+  font-weight: 800;
+  letter-spacing: -.5px;
+}
+
+.icon-button {
+  color: #176b43;
+}
+
+.bottom-nav {
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  min-height: calc(84px + env(safe-area-inset-bottom, 0));
+  padding: 8px 3px max(7px, env(safe-area-inset-bottom));
+  overflow: visible;
+  background: rgb(255 255 255 / 98%);
+  border-top: 1px solid #e2e7e4;
+  box-shadow: 0 -5px 18px rgb(22 69 50 / 7%);
+}
+
+.nav-item {
+  gap: 4px;
+  padding: 4px 0;
+  color: #253552;
+  font-size: 9.5px;
+  line-height: 1.05;
+  text-align: center;
+}
+
+.nav-item svg {
+  width: 21px;
+  height: 21px;
+}
+
+.nav-item.active {
+  color: #176b43;
+}
+
+.nav-item--report {
+  position: relative;
+  justify-content: flex-start;
+  padding-top: 0;
+  color: #176b43;
+  font-weight: 650;
+}
+
+.report-button {
+  display: grid;
+  width: 54px;
+  height: 54px;
+  margin-top: -29px;
+  color: #fff;
+  background: linear-gradient(145deg, #287d52, #0c5c39);
+  border: 4px solid #fff;
+  border-radius: 50%;
+  box-shadow: 0 5px 13px rgb(9 75 46 / 28%);
+  font-size: 38px;
+  font-weight: 300;
+  line-height: 1;
+  place-items: center;
+}
+
+.nav-item--report > span:last-child {
+  margin-top: 1px;
+  font-size: 8.5px;
+  letter-spacing: -.25px;
+}
+
+@media (max-width: 370px) {
+  .nav-item {
+    font-size: 8.5px;
+  }
+
+  .report-button {
+    width: 50px;
+    height: 50px;
+  }
+
+  .nav-item--report > span:last-child {
+    font-size: 7.7px;
+  }
+}

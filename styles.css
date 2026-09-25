@@ -667,3 +667,40 @@ button:focus-visible, a:focus-visible {
     font-size: 7.7px;
   }
 }
+
+
+/* Center the primary action in the seven-item navigation */
+.bottom-nav {
+  position: relative;
+  z-index: 2000;
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+  overflow: visible;
+}
+
+.nav-item--report {
+  z-index: 2;
+  justify-content: flex-start;
+  padding-top: 34px;
+}
+
+.report-button {
+  position: absolute;
+  top: -37px;
+  left: 50%;
+  margin-top: 0;
+  transform: translateX(-50%);
+}
+
+.nav-item--report > span:last-child {
+  margin-top: 0;
+}
+
+@media (max-width: 370px) {
+  .nav-item {
+    font-size: 8px;
+  }
+
+  .nav-item--report > span:last-child {
+    font-size: 7.4px;
+  }
+}

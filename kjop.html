@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="no">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#07513d">
+  <title>Kjøp fiskekort – EasyFisk</title>
+  <link rel="stylesheet" href="styles.css?v=20261001-21">
+  <link rel="stylesheet" href="kjop.css?v=20261001-24">
+</head>
+<body>
+  <div class="purchase-page">
+    <header class="purchase-header">
+      <a href="index.html" class="back-link" aria-label="Tilbake til kartet">←</a>
+      <strong>Kjøp fiskekort</strong>
+      <span>EasyFisk</span>
+    </header>
+    <main class="purchase-main">
+      <h1 class="chosen-place" id="search-heading" hidden>Når vil du fiske?</h1>
+      <p class="account-status" id="search-intro" hidden>Velg fiskedøgn og antall fiskere for å finne en ledig sone.</p>
+      <div id="place-picker">
+        <label class="place-label" for="place-select">Velg fiskeplass</label>
+        <select id="place-select"></select>
+      </div>
+      <p class="chosen-place" id="chosen-place" hidden></p>
+      <p class="fishing-period">Et fiskedøgn varer fra <strong>18.00</strong> til <strong>17.59 neste dag</strong>.</p>
+      <fieldset class="ticket-options">
+        <legend>Velg fiskekort</legend>
+        <div class="ticket-types">
+          <label><input type="radio" name="ticket-type" id="single-ticket" value="single" checked> Døgnkort</label>
+          <label><input type="radio" name="ticket-type" id="group-ticket" value="group"> Gruppekort</label>
+        </div>
+        <div id="group-options" hidden>
+          <label for="group-size">Antall fiskere</label>
+          <select id="group-size">
+            <option value="2">2 fiskere</option>
+            <option value="3">3 fiskere</option>
+            <option value="4">4 fiskere</option>
+          </select>
+        </div>
+        <p id="ticket-help">Døgnkort gjelder for én fisker.</p>
+        <p id="selection-update" role="status"></p>
+      </fieldset>
+
+      <section class="calendar-card" aria-label="Velg fiskedøgn">
+        <div class="calendar-toolbar">
+          <button id="previous-month" type="button" aria-label="Forrige måned">‹</button>
+          <h1 id="calendar-month" aria-live="polite"></h1>
+          <button id="next-month" type="button" aria-label="Neste måned">›</button>
+        </div>
+        <div class="calendar-weekdays" aria-hidden="true">
+          <span>Man</span><span>Tir</span><span>Ons</span><span>Tor</span><span>Fre</span><span>Lør</span><span>Søn</span>
+        </div>
+        <div class="calendar-days" id="calendar-days" role="group" aria-labelledby="calendar-month"></div>
+        <div class="calendar-legend">
+          <span><i class="legend-available"></i>Ledig</span>
+          <span><i class="legend-full"></i>Fullt</span>
+          <span><i class="legend-selected"></i>Valgt</span>
+        </div>
+        <p class="calendar-help">Tallene viser opptatte plasser / totalt antall plasser. Trykk på en ledig dag for å velge eller fjerne den.</p>
+      </section>
+
+      <section class="selection-card" aria-labelledby="selection-heading">
+        <h2 id="selection-heading">Valgte fiskedøgn</h2>
+        <p id="selection-empty">Velg én eller flere dager i kalenderen.</p>
+        <ul id="selected-days"></ul>
+        <p id="selection-total" role="status" aria-live="polite"></p>
+        <button class="continue-button" id="continue-purchase" type="button" disabled>Fortsett til kjøp →</button>
+      </section>
+      <section id="zone-results" class="zone-results" hidden aria-labelledby="results-heading">
+        <h2 id="results-heading">Tilgjengelige soner</h2>
+        <p id="results-status" class="account-status" role="status" aria-live="polite"></p>
+        <div id="zone-result-list"></div>
+      </section>
+    </main>
+  </div>
+  <script src="inatur-data.js?v=20261001-4"></script>
+  <script src="fishing-places.js?v=20261001-7"></script>
+  <script type="module" src="kjop.js?v=20261001-24"></script>
+</body>
+</html>

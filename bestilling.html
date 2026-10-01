@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="no">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#07513d">
+  <title>Bestilling – EasyFisk</title>
+  <link rel="stylesheet" href="styles.css?v=20261001-21">
+  <link rel="stylesheet" href="kjop.css?v=20261001-19">
+</head>
+<body>
+  <div class="purchase-page">
+    <header class="purchase-header">
+      <a href="kjop.html" class="back-link" id="back-to-calendar" aria-label="Tilbake til kalenderen">←</a>
+      <strong>Din bestilling</strong>
+      <span>EasyFisk</span>
+    </header>
+    <main class="purchase-main">
+      <div id="invalid-booking" hidden>
+        <h1 class="chosen-place">Velg fiskedøgn</h1>
+        <p>Gå tilbake til kalenderen og velg ledige dager før du fortsetter.</p>
+        <a class="continue-button" href="kjop.html">Til kalenderen</a>
+      </div>
+      <div id="booking-content" hidden>
+        <h1 class="chosen-place" id="booking-place"></h1>
+        <section class="selection-card" aria-labelledby="booking-heading">
+          <h2 id="booking-heading">Bestillingsoversikt</h2>
+          <p class="booking-type" id="booking-type"></p>
+          <ul class="booking-periods" id="booking-periods"></ul>
+          <p class="booking-total" id="booking-total"></p>
+          <a class="edit-dates" id="edit-dates" href="kjop.html">Endre dager eller antall fiskere</a>
+        </section>
+        <p class="account-status" id="account-status" role="status">Sjekker innlogging …</p>
+        <section class="selection-card" id="guest-account" hidden>
+          <h2>Logg inn for å kjøpe fiskekort</h2>
+          <p class="account-status">Du må ha en konto for å kjøpe kort.</p>
+          <a class="account-button" id="login-link" href="logginn.html">Logg inn</a>
+          <a class="account-button" id="signup-link" href="registrer.html">Registrer deg</a>
+        </section>
+        <form id="booking-form" hidden>
+          <fieldset class="booking-fields" id="checkout-fields" disabled>
+          <section class="selection-card" aria-labelledby="contact-heading">
+            <h2 id="contact-heading">Dine opplysninger</h2>
+            <dl class="profile-details">
+              <div><dt>Navn</dt><dd id="account-name"></dd></div>
+              <div><dt>E-post</dt><dd id="account-email"></dd></div>
+              <div><dt>Telefonnummer</dt><dd id="account-phone"></dd></div>
+            </dl>
+          </section>
+          <section class="selection-card" aria-labelledby="fishers-heading">
+            <h2 id="fishers-heading">Fiskere på kortet</h2>
+            <label class="recipient-option"><input id="buy-for-others" type="checkbox"> Jeg kjøper kort for noen andre</label>
+            <p class="account-status" id="self-fisher">Ditt kort bruker navnet på profilen.</p>
+            <div id="fisher-fields"></div>
+            <div id="recipient-delivery" hidden>
+              <p class="account-status">Venner får kortet i appen uten melding. Bare mottakere som legges inn manuelt, får en e-post med lenke til kortet og kan velge å opprette en bruker.</p>
+              <button class="account-button" id="preview-message" type="button">Forhåndsvis kortmelding</button>
+              <p class="account-status" id="recipient-status" role="status"></p>
+            </div>
+          </section>
+          <section class="selection-card" aria-labelledby="rules-heading">
+            <h2 id="rules-heading">Fiskeregler</h2>
+            <div class="fishing-rules">
+              <p>Mandalselva 2026 – kort oversikt</p>
+              <ul>
+                <li>Ha fiskekort, desinfiseringsbevis og betalt fiskeravgift tilgjengelig. Barn under 18 år er fritatt for fiskeravgiften.</li>
+                <li>Kortet er personlig. Alle fiskere på gruppekort må registreres, og sonens stangbegrensning gjelder.</li>
+                <li>Flue, sluk og mark er tillatt. Bruk mothakeløse kroker, høyst én treblekrok og sirkelkrok ved markfiske.</li>
+                <li>Døgnkvoten er én avlivet laks og én sjøørret. Stopp døgnets fiske når laksen er avlivet.</li>
+                <li>Fra 1. august er sesongkvoten fem avlivede laks: én inntil 90 cm og fire under 65 cm. Etter sesongkvoten avsluttes alt fiske.</li>
+                <li>Fisket stenges over 21 °C målt på Kjølemo. Følg gjeldende sesong, sonegrenser og fangstrapportering.</li>
+              </ul>
+              <a href="https://lakseelver.no/nb/elver/mandalselva/about" target="_blank" rel="noopener noreferrer">Les fullstendige fiskeregler for Mandalselva ↗</a>
+            </div>
+            <label class="recipient-option rules-acceptance">
+              <input id="accept-rules" name="acceptRules" type="checkbox" required>
+              Jeg har lest fiskereglene og vil følge dem.
+            </label>
+            <p class="account-status" id="rules-status" role="status"></p>
+          </section>
+          <section class="selection-card" aria-labelledby="payment-heading">
+            <h2 id="payment-heading">Betaling</h2>
+            <button class="continue-button" id="payment-button" type="submit" disabled>Gå til betaling</button>
+          </section>
+          </fieldset>
+        </form>
+      </div>
+    </main>
+  </div>
+  <dialog class="message-dialog" id="message-dialog" aria-labelledby="message-heading">
+    <h2 id="message-heading">Forhåndsvisning av kortmelding</h2>
+    <div id="message-previews"></div>
+    <button class="account-button" id="close-message" type="button">Lukk</button>
+  </dialog>
+  <script src="fishing-places.js?v=20261001-7"></script>
+  <script type="module" src="bestilling.js?v=20261001-23"></script>
+</body>
+</html>

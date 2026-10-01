@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="no">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#07513d">
+  <title>Registrer deg – EasyFisk</title>
+  <link rel="stylesheet" href="styles.css?v=20261001-21">
+  <link rel="stylesheet" href="kjop.css?v=20261001-19">
+</head>
+<body>
+  <div class="purchase-page">
+    <header class="purchase-header">
+      <a href="kjop.html" class="back-link" id="signup-back" aria-label="Tilbake til bestillingen">←</a>
+      <strong>Registrer deg</strong>
+      <span>EasyFisk</span>
+    </header>
+    <main class="purchase-main">
+      <h1 class="chosen-place">Opprett konto</h1>
+      <form class="selection-card" id="signup-form">
+        <label class="checkout-label" for="signup-name">Fullt navn</label>
+        <input class="checkout-input" id="signup-name" name="name" autocomplete="name" required maxlength="120">
+        <label class="checkout-label" for="signup-email">E-post</label>
+        <input class="checkout-input" id="signup-email" name="email" type="email" autocomplete="email" required maxlength="254">
+        <label class="checkout-label" for="signup-phone">Telefonnummer</label>
+        <input class="checkout-input" id="signup-phone" name="phone" type="tel" autocomplete="tel" required maxlength="30">
+        <button class="continue-button" id="signup-submit" type="submit">Opprett konto</button>
+        <p class="account-status" id="signup-status" role="status"></p>
+      </form>
+      <a class="guest-return" id="login-link" href="logginn.html">Har du allerede konto? Logg inn</a>
+    </main>
+  </div>
+  <script type="module" src="registrer.js?v=20261001-23"></script>
+</body>
+</html>

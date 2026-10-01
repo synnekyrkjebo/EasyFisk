@@ -1,6 +1,6 @@
 # EasyFisk
 
-Mobiltilpasset webapp for fiskere i Mandalselva.
+Mobiltilpasset prototype for fiskere i Mandalselva.
 
 ## Kom i gang
 
@@ -9,14 +9,30 @@ npm install
 npm run dev
 ```
 
-Første versjon inneholder en interaktiv kartside og fast navigasjon for Kart, Fiskekort, Fangst og Profil.
+`npm run build` kontrollerer TypeScript og bygger appen til `dist/`. `npm run preview` viser produksjonsbygget.
 
-Eksempelinnlogging kan testes på `logginn.html`. Trykk «Logg inn med demoprofil» eller lag en egen demoprofil via registreringssiden. Profilen lagres i nettleseren, og innloggingen gjelder i samme fane. Dette oppretter ingen ekte brukerkonto og utfører ingen betaling.
+## Filstruktur
 
-Ved kjøp for andre kan du velge en eksempelvenn eller skrive inn mottakerens navn og e-post. «Forhåndsvis kortmelding» åpner en melding med lenke til et eksempelkort. Mottakeren kan se kortet uten konto og gå videre til valgfri registrering med opplysningene fylt inn. Ingen melding sendes, og disse kortlenkene virker bare i nettleseren der de ble opprettet.
+```text
+index.html              Kartet og hovedinngangen
+pages/                  HTML for fiskekort, kjøp, bestilling, innlogging og økter
+scripts/
+  map.js                Kart, soner og posisjonssporing
+  pages/                JavaScript for hver side
+  shared/               Innlogging, bestillinger, dokumenter og fiskeøkter
+  data/                 Fiskesoner og informasjon fra Inatur
+styles/                 Felles utseende og kjøps-/profil-/øktvisninger
+assets/inatur/          Bilder av fiskesonene
+src/                    Tidligere React-grunnlag (ikke inngangen til prototypen)
+.github/workflows/      Publiseringsoppsett
+```
 
-Når fiskereglene er bekreftet, lagrer «Gå til betaling» en demobestilling og åpner Fiskekort i hovedmenyen. Kortene lagres i nettleseren; ingen betaling eller melding sendes, og demokortene er ikke gyldige til fiske. Gruppekort gir ett kort per fisker.
+Sideadressene er fortsatt `/fiskekort.html`, `/kjop.html`, `/bestilling.html`, `/logginn.html`, `/registrer.html`, `/minside.html` og `/loggfor.html`. Vite kobler disse til HTML-filene i `pages/` under utvikling og legger de ferdigbygde sidene i roten av `dist/`. Dermed fungerer navigasjon og tidligere lagrede kortlenker som før. Åpne sidene gjennom utviklingsserveren eller produksjonsbygget.
 
-Loggfør åpner fiskeøkter med valg mellom aktiv og tidligere økt. Økter, fangster og bilder lagres per profil i IndexedDB. Fisketidene er basert på Mandalselvas regler for 2026; nyere år blokkeres inntil fisketider er satt. Aktiv start kontrollerer sesong, eget kort, vedlagte dokumenter og at ingen annen økt pågår. Midlertidige stenginger og vanntemperatur har ingen tilkoblet datakilde; fiskeren bekrefter at elva er åpen. Fangstene sendes ikke til ekstern fangstrapportering.
+## Prototypens data
 
-For visning av prototypens brukerflyt kan økter startes på eget fiskekort uten kontroll av sesong, kortets tidsrom, dokumenter eller midlertidig stenging. Én aktiv økt om gangen og validering av økt- og fangsttid beholdes.
+Profiler og fiskekort lagres i nettleserens localStorage; innloggingen gjelder i samme fane via sessionStorage. Dokumenter, fiskeøkter og fangstbilder lagres per profil i IndexedDB. Det finnes ingen tilkoblet konto-, betalings- eller meldingsløsning, og fangstene sendes ikke til ekstern fangstrapportering.
+
+Ved kjøp for andre velges en venn eller mottakerens navn og e-post. Forhåndsvisning av kortmeldingen gir en kortlenke som virker i nettleseren der kortet ble lagret. Gruppekort gir ett kort per fisker, og kun mottakerens egne kort vises på profilen.
+
+For å vise hele brukerflyten kan en fiskeøkt startes på eget fiskekort uten sperrer for sesong, kortets tidsrom eller dokumenter. Én aktiv økt om gangen og validering av økt- og fangsttid beholdes. Sesong- og kortkontroller finnes i `scripts/shared/fishing-sessions.js` for senere tilkobling til faktisk tilgjengelighet.

@@ -4,9 +4,9 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <meta name="theme-color" content="#07513d">
-  <title>Ditt fiskekort – EasyFisk</title>
-  <link rel="stylesheet" href="styles.css?v=20261001-21">
-  <link rel="stylesheet" href="kjop.css?v=20261001-29">
+  <title>Min side – EasyFisk</title>
+  <link rel="stylesheet" href="../styles/main.css?v=20261001-21">
+  <link rel="stylesheet" href="../styles/purchase.css?v=20261001-29">
 </head>
 <body>
   <div class="purchase-page tickets-page">
@@ -24,44 +24,30 @@
       </button>
     </header>
     <main class="purchase-main">
-      <div id="ticket-list" hidden>
-        <h1 class="chosen-place">Mine fiskekort</h1>
-        <p class="account-status" id="ticket-list-status" role="status"></p>
-        <div id="ordered-tickets"></div>
-        <a class="continue-button buy-ticket-button" href="kjop.html">Kjøp fiskekort</a>
-        <a class="guest-return" id="list-login" hidden>Logg inn for å se fiskekortene dine</a>
-      </div>
-      <div id="ticket-missing" hidden>
-        <h1 class="chosen-place">Kortet er ikke tilgjengelig</h1>
-        <p class="account-status">Vi fant ikke fiskekortet. Sjekk at du har riktig lenke.</p>
-        <a class="account-button" href="index.html">Til kartet</a>
-      </div>
-      <div id="ticket-content" hidden>
-        <h1 class="chosen-place" id="ticket-place"></h1>
-        <section class="selection-card">
-          <h2 id="ticket-recipient"></h2>
-          <ul class="booking-periods" id="ticket-periods"></ul>
-          <p class="account-status" id="ticket-buyer"></p>
-        </section>
-        <section class="selection-card" id="ticket-signup">
-          <h2>Vil du opprette en bruker?</h2>
-          <p class="account-status">Opprett en konto for å samle fiskekortene dine på ett sted.</p>
-          <a class="continue-button" id="ticket-signup-link" href="registrer.html">Registrer deg</a>
-          <a class="guest-return" id="ticket-login-link" href="logginn.html">Har du konto? Logg inn</a>
-        </section>
-      </div>
-      <section class="selection-card fishing-documents" id="fishing-documents" hidden aria-labelledby="documents-heading">
-        <h2 id="documents-heading">Dokumenter til fisket</h2>
-        <p class="account-status" id="documents-summary"></p>
-        <div id="document-list"></div>
+      <h1 class="chosen-place">Min side</h1>
+      <section class="selection-card" id="profile-guest" hidden>
+        <h2>Vil du logge inn eller registrere deg?</h2>
+        <p class="account-status">Logg inn for å se profilen og fiskekortene dine.</p>
+        <a class="continue-button" id="profile-login" href="logginn.html">Logg inn</a>
+        <a class="guest-return" id="profile-signup" href="registrer.html">Registrer bruker</a>
       </section>
+      <section class="selection-card" id="profile-account" hidden>
+        <h2>Din profil</h2>
+        <dl class="profile-details">
+          <div><dt>Navn</dt><dd id="profile-name"></dd></div>
+          <div><dt>E-post</dt><dd id="profile-email"></dd></div>
+          <div><dt>Telefonnummer</dt><dd id="profile-phone"></dd></div>
+        </dl>
+        <a class="continue-button" href="fiskekort.html">Mine fiskekort</a>
+      </section>
+      <p class="account-status" id="profile-status" role="status"></p>
     </main>
     <nav class="bottom-nav" aria-label="Hovedmeny">
       <a class="nav-item" href="index.html">
         <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s7-6 7-12a7 7 0 1 0-14 0c0 6 7 12 7 12Z"/><circle cx="12" cy="9" r="2.3"/></svg>
         <span>Kart</span>
       </a>
-      <a class="nav-item active" href="fiskekort.html" aria-current="page">
+      <a class="nav-item" href="fiskekort.html">
         <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 6h18v4a2 2 0 0 0 0 4v4H3v-4a2 2 0 0 0 0-4zM13 6v12"/></svg>
         <span>Fiskekort</span>
       </a>
@@ -75,12 +61,12 @@
         <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="8" cy="8" r="3"/><circle cx="17" cy="9" r="2.5"/><path d="M2 20c0-4 2.5-7 6-7s6 3 6 7M14 14c4-1 7 1.5 7 5"/></svg>
         <span>Feed</span>
       </a>
-      <a class="nav-item" href="minside.html">
+      <a class="nav-item active" href="minside.html" aria-current="page">
         <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/></svg>
         <span>Min side</span>
       </a>
     </nav>
   </div>
-  <script type="module" src="fiskekort.js?v=20261001-36"></script>
+  <script type="module" src="../scripts/pages/profile.js?v=20261001-31"></script>
 </body>
 </html>

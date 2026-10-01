@@ -1,4 +1,4 @@
-import { getCurrentUser } from "./auth.js";
+import { getCurrentUser } from "../shared/auth.js";
 
 for (const [id, page] of [["#profile-login", "logginn.html"], ["#profile-signup", "registrer.html"]]) {
   const url = new URL(page, window.location.href);

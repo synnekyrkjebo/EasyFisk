@@ -1,7 +1,7 @@
-import { readDemoTicket, listDemoTickets, readDemoOrder } from "./demo-tickets.js";
-import { addDays } from "./purchase-calendar.js";
-import { getCurrentUser } from "./auth.js";
-import { showFishingDocuments } from "./fishing-documents.js";
+import { readDemoTicket, listDemoTickets, readDemoOrder } from "../shared/demo-tickets.js";
+import { addDays } from "../shared/purchase-calendar.js";
+import { getCurrentUser } from "../shared/auth.js";
+import { showFishingDocuments } from "../shared/fishing-documents.js";
 
 const token = new URLSearchParams(window.location.search).get("kort");
 const ticket = readDemoTicket(token);

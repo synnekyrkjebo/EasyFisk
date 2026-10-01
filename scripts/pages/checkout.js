@@ -1,8 +1,8 @@
-import { readBooking, bookingUrl } from "./booking.js";
-import { addDays } from "./purchase-calendar.js";
-import { getCurrentUser } from "./auth.js";
-import { createRecipientField } from "./recipients.js";
-import { createDemoTicket, completeDemoOrder } from "./demo-tickets.js";
+import { readBooking, bookingUrl } from "../shared/booking.js";
+import { addDays } from "../shared/purchase-calendar.js";
+import { getCurrentUser } from "../shared/auth.js";
+import { createRecipientField } from "../shared/recipients.js";
+import { createDemoTicket, completeDemoOrder } from "../shared/demo-tickets.js";
 
 const booking = readBooking(new URLSearchParams(window.location.search), fishingPlaces);
 const acceptRules = document.querySelector("#accept-rules");

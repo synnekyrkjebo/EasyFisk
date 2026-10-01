@@ -1,5 +1,5 @@
-import { addDays, firstBookableDay, monthDays, exampleAvailability } from "./purchase-calendar.js";
-import { readBooking, bookingUrl } from "./booking.js";
+import { addDays, firstBookableDay, monthDays, exampleAvailability } from "../shared/purchase-calendar.js";
+import { readBooking, bookingUrl } from "../shared/booking.js";
 
 const placeSelect = document.querySelector("#place-select");
 const calendar = document.querySelector("#calendar-days");

@@ -1,5 +1,5 @@
-import { registerUser, authReturnUrl } from "./auth.js";
-import { readDemoTicket } from "./demo-tickets.js";
+import { registerUser, authReturnUrl } from "../shared/auth.js";
+import { readDemoTicket } from "../shared/demo-tickets.js";
 
 const returnUrl = authReturnUrl(window.location.href);
 document.querySelector("#signup-back").href = returnUrl.href;

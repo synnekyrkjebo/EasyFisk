@@ -1,6 +1,6 @@
-import { getCurrentUser } from "./auth.js";
-import { listDemoTickets } from "./demo-tickets.js";
-import { SPECIES, localTime, parseTime, validateCatch, listSessions, saveSession, ticketCoversSession } from "./fishing-sessions.js";
+import { getCurrentUser } from "../shared/auth.js";
+import { listDemoTickets } from "../shared/demo-tickets.js";
+import { SPECIES, localTime, parseTime, validateCatch, listSessions, saveSession, ticketCoversSession } from "../shared/fishing-sessions.js";
 
 const $ = selector => document.querySelector(selector);
 let user, tickets = [], sessions = [], current, editingFish, selectedPhoto, previewUrl, busy = false;

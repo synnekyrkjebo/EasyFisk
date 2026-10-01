@@ -1,4 +1,4 @@
-import { loginUser, getDemoProfile, authReturnUrl } from "./auth.js";
+import { loginUser, getDemoProfile, authReturnUrl } from "../shared/auth.js";
 
 const returnUrl = authReturnUrl(window.location.href);
 document.querySelector("#login-back").href = returnUrl.href;

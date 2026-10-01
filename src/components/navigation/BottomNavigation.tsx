@@ -1,11 +1,12 @@
-import { Fish, Map, Ticket, UserRound } from "lucide-react";
+import { Map, Plus, Ticket, UserRound, Users } from "lucide-react";
 import { NavLink } from "react-router-dom";
 
 const navigationItems = [
   { to: "/kart", label: "Kart", icon: Map },
   { to: "/fiskekort", label: "Fiskekort", icon: Ticket },
-  { to: "/fangst", label: "Fangst", icon: Fish },
-  { to: "/profil", label: "Profil", icon: UserRound },
+  { to: "/fangst", label: "Loggfør", icon: Plus },
+  { to: "/feed", label: "Feed", icon: Users },
+  { to: "/profil", label: "Min side", icon: UserRound },
 ];
 
 export default function BottomNavigation() {

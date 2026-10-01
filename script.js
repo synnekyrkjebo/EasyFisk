@@ -1,32 +1,76 @@
 const zoneCard = document.querySelector("#zone-card");
 const closeCard = document.querySelector(".close-card");
+const readMoreButton = document.querySelector("#read-more-button");
+const zoneDetails = document.querySelector("#zone-details");
+const zoneOffers = document.querySelector("#zone-offers");
+const buyButton = document.querySelector("#buy-button");
+let selectedPlace;
 
-const fishingPlaces = [
-  { zone: "Sone 1", name: "Sandnes fiskeri", area: "Nedre Mandalselva", lat: 58.028, lng: 7.459 },
-  { zone: "Sone 1", name: "Piren med flere", area: "Nedre Mandalselva", lat: 58.052, lng: 7.482 },
-  { zone: "Sone 2", name: "Bringsdal", area: "Mandal–Holum", lat: 58.072, lng: 7.505 },
-  { zone: "Sone 2", name: "Furuholmen", area: "Mandal–Holum", lat: 58.087, lng: 7.516 },
-  { zone: "Sone 2", name: "Smeland", area: "Mandal–Holum", lat: 58.1, lng: 7.525 },
-  { zone: "Sone 2", name: "Bjørkenes", area: "Mandal–Holum", lat: 58.114, lng: 7.529 },
-  { zone: "Sone 2", name: "Fuskeland", area: "Mandal–Holum", lat: 58.13, lng: 7.535 },
-  { zone: "Sone 2", name: "Fossefjellene", area: "Mandal–Holum", lat: 58.147, lng: 7.544 },
-  { zone: "Sone 2", name: "Øvre Holum", area: "Marnardal–Holum", lat: 58.164, lng: 7.552 },
-  { zone: "Sone 2", name: "Heia", area: "Marnardal–Holum", lat: 58.179, lng: 7.545 },
-  { zone: "Sone 2", name: "Holmegård", area: "Marnardal–Holum", lat: 58.194, lng: 7.532 },
-  { zone: "Sone 2", name: "Møll", area: "Marnardal–Holum", lat: 58.208, lng: 7.519 },
-  { zone: "Sone 2", name: "Nedre Holum", area: "Marnardal–Holum", lat: 58.222, lng: 7.508 },
-  { zone: "Sone 2", name: "Nedre Nødig", area: "Marnardal–Holum", lat: 58.237, lng: 7.503 },
-  { zone: "Sone 2", name: "Stoveland og Grimefossen", area: "Marnardal–Holum", lat: 58.252, lng: 7.503 },
-  { zone: "Sone 3", name: "Mandalselva Sone 3", area: "Marnardal", lat: 58.292, lng: 7.51 },
-  { zone: "Sone 4", name: "Felles Nord Manflåvann", area: "Manflåvann", lat: 58.35, lng: 7.518 },
-  { zone: "Sone 4", name: "Laksehylen", area: "Øvre del av Mandalselva", lat: 58.367, lng: 7.524 },
-  { zone: "Sone 4", name: "Lakseosen", area: "Øvre del av Mandalselva", lat: 58.384, lng: 7.528 },
-  { zone: "Sone 4", name: "Strædethylen", area: "Øvre del av Mandalselva", lat: 58.399, lng: 7.525 },
-  { zone: "Sone 4", name: "Nodehylen", area: "Øvre del av Mandalselva", lat: 58.414, lng: 7.522 },
-  { zone: "Sone 4", name: "Bjåhylen", area: "Øvre del av Mandalselva", lat: 58.429, lng: 7.52 },
-  { zone: "Sone 4", name: "Steinshylen", area: "Øvre del av Mandalselva", lat: 58.445, lng: 7.517 },
-  { zone: "Sone 4", name: "Klevelandfossen", area: "Øvre del av Mandalselva", lat: 58.462, lng: 7.514 },
-];
+buyButton.addEventListener("click", () => {
+  if (!selectedPlace) return;
+  const purchaseUrl = new URL("kjop.html", window.location.href);
+  purchaseUrl.searchParams.set("sted", selectedPlace.name);
+  window.location.assign(purchaseUrl.href);
+});
+
+function renderOffers(place) {
+  const offers = inaturOffers[place.name];
+  zoneOffers.replaceChildren();
+
+  offers.forEach((offer) => {
+    const article = document.createElement("article");
+    article.className = "zone-offer";
+    if (offers.length > 1) {
+      const title = document.createElement("h3");
+      title.textContent = offer.title.split(",").pop().trim();
+      article.append(title);
+    }
+
+    const gallery = document.createElement("div");
+    gallery.className = "zone-gallery";
+    gallery.setAttribute("role", "region");
+    gallery.setAttribute("aria-label", `Bilder fra ${offer.title}`);
+    gallery.tabIndex = 0;
+    offer.images.forEach((photo, index) => {
+      const figure = document.createElement("figure");
+      const image = document.createElement("img");
+      image.src = photo.src;
+      image.alt = photo.alt;
+      image.loading = "lazy";
+      image.decoding = "async";
+      image.addEventListener("error", () => figure.remove());
+      const caption = document.createElement("figcaption");
+      caption.textContent = `Bilde ${index + 1} av ${offer.images.length} · Inatur`;
+      figure.append(image, caption);
+      gallery.append(figure);
+    });
+    if (offer.images.length) article.append(gallery);
+
+    const description = document.createElement("p");
+    description.textContent = offer.description;
+    const source = document.createElement("a");
+    source.href = offer.sourceUrl;
+    source.target = "_blank";
+    source.rel = "noopener noreferrer";
+    source.textContent = "Bilder og oppdaterte regler på Inatur ↗";
+    article.append(description, source);
+    zoneOffers.append(article);
+  });
+}
+
+function setCardExpanded(expanded) {
+  zoneCard.classList.toggle("zone-card--expanded", expanded);
+  readMoreButton.setAttribute("aria-expanded", String(expanded));
+  readMoreButton.textContent = expanded ? "Vis mindre" : "Les mer";
+  zoneDetails.hidden = !expanded;
+  if (!expanded) zoneCard.scrollTop = 0;
+}
+
+readMoreButton.addEventListener("click", () => {
+  setCardExpanded(readMoreButton.getAttribute("aria-expanded") !== "true");
+});
+
+
 
 const map = L.map("map-canvas", {
   zoomControl: true,
@@ -81,13 +125,16 @@ fishingPlaces.forEach((place) => {
     }
 
     selectedMarker = marker;
+    selectedPlace = place;
     marker.setStyle({ fillColor: "#ef9f2f", radius: 9 });
 
     document.querySelector("#marker-zone").textContent = place.zone;
-    document.querySelector("#marker-name").textContent = place.name;
+    document.querySelector("#marker-name").textContent =
+      place.name === "Mandalselva Sone 3" ? "Mandalselva" : place.name;
     document.querySelector("#marker-area").textContent = place.area;
-    document.querySelector("#marker-product").textContent =
-      `Mandalselva ${place.zone} – ${place.name}`;
+    renderOffers(place);
+
+    setCardExpanded(false);
 
     zoneCard.classList.add("show");
   });
@@ -95,6 +142,8 @@ fishingPlaces.forEach((place) => {
 
 map.fitBounds(fishingPlaces.map((place) => [place.lat, place.lng]), { padding: [30, 30] });
 
+let userLocationMarker;
+let centerOnNextLocation = false;
 const locateControl = L.control({ position: "bottomright" });
 
 locateControl.onAdd = () => {
@@ -102,26 +151,41 @@ locateControl.onAdd = () => {
   button.type = "button";
   button.title = "Finn min posisjon";
   button.setAttribute("aria-label", "Finn min posisjon");
-  button.innerHTML = "⌖";
+  button.innerHTML = '<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="7"/><circle cx="12" cy="12" r="2"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3"/></svg>';
   L.DomEvent.disableClickPropagation(button);
-  L.DomEvent.on(button, "click", () => map.locate({ setView: true, maxZoom: 14 }));
+  L.DomEvent.on(button, "click", () => {
+    centerOnNextLocation = true;
+    map.stopLocate();
+    map.locate({ watch: true, enableHighAccuracy: true, setView: false });
+  });
   return button;
 };
 
 locateControl.addTo(map);
 
 map.on("locationfound", (event) => {
-  L.circleMarker(event.latlng, {
-    radius: 8,
-    color: "#ffffff",
-    weight: 3,
-    fillColor: "#2878d0",
-    fillOpacity: 1,
-  }).addTo(map).bindTooltip("Din posisjon").openTooltip();
+  if (userLocationMarker) {
+    userLocationMarker.setLatLng(event.latlng);
+  } else {
+    userLocationMarker = L.circleMarker(event.latlng, {
+      radius: 8,
+      color: "#ffffff",
+      weight: 3,
+      fillColor: "#2878d0",
+      fillOpacity: 1,
+    }).addTo(map).bindTooltip("Din posisjon").openTooltip();
+  }
+  if (centerOnNextLocation) {
+    map.setView(event.latlng, 14);
+    centerOnNextLocation = false;
+  }
 });
+
+window.addEventListener("pagehide", () => map.stopLocate());
 
 closeCard.addEventListener("click", () => {
   zoneCard.classList.remove("show");
+  setCardExpanded(false);
 
   if (selectedMarker) {
     selectedMarker.setStyle({ fillColor: "#07513d", radius: 7 });

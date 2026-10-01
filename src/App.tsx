@@ -10,8 +10,9 @@ export default function App() {
         <Route index element={<Navigate to="/kart" replace />} />
         <Route path="/kart" element={<MapPage />} />
         <Route path="/fiskekort" element={<PlaceholderPage title="Fiskekort" />} />
-        <Route path="/fangst" element={<PlaceholderPage title="Fangst" />} />
-        <Route path="/profil" element={<PlaceholderPage title="Profil" />} />
+        <Route path="/feed" element={<PlaceholderPage title="Feed" />} />
+        <Route path="/fangst" element={<PlaceholderPage title="Loggfør" />} />
+        <Route path="/profil" element={<PlaceholderPage title="Min side" />} />
       </Route>
     </Routes>
   );

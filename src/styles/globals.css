@@ -143,7 +143,7 @@ button {
 .bottom-navigation {
   z-index: 1000;
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(5, 1fr);
   min-height: calc(68px + env(safe-area-inset-bottom, 0));
   padding: 7px 6px env(safe-area-inset-bottom, 0);
   background: rgb(255 255 255 / 97%);

@@ -775,3 +775,21 @@ button:focus-visible, a:focus-visible {
 }
 
 .map-location-button svg { display: block; width: 24px; height: 24px; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; }
+
+.bottom-nav > .nav-item, .bottom-nav .nav-item--report > span:last-child { font-size: 13px; line-height: 1.3; }
+
+/* Shared icon and label rows keep every menu label aligned. */
+.bottom-nav > .nav-item {
+  display: grid;
+  grid-template-rows: 21px auto;
+  align-content: center;
+  justify-items: center;
+  gap: 4px;
+  padding: 4px 0;
+}
+.bottom-nav > .nav-item > span:last-child { grid-row: 2; margin-top: 0; }
+.bottom-nav .report-button { top: -18px; width: 62px; height: 62px; }
+.bottom-nav .report-button svg { width: 32px; height: 32px; }
+
+.bottom-nav > .nav-item--report { grid-template-columns: minmax(0, 1fr); }
+.bottom-nav .nav-item--report > span:last-child { grid-column: 1; justify-self: center; width: 100%; text-align: center; letter-spacing: normal; }

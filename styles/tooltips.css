@@ -1,0 +1,9 @@
+.header--with-help { grid-template-columns: 1fr auto; }
+.header-actions { display: flex; align-items: center; gap: 2px; }
+.help-toggle { display: grid; flex: 0 0 32px; width: 32px; height: 32px; margin: 0 8px 0 0; padding: 0; border: 1px solid currentColor; border-radius: 50%; color: inherit; background: transparent; font: inherit; font-size: 18px; font-weight: 650; cursor: pointer; place-items: center; }
+.help-toggle[aria-pressed="true"] { color: #fff; background: #176b43; border-color: #176b43; }
+.help-tooltip { position: fixed; z-index: 10000; width: max-content; max-width: min(280px, calc(100vw - 16px)); padding: 10px 13px; border: 1px solid #c8ded1; border-radius: 10px; color: #fff; background: #07513d; box-shadow: 0 4px 16px rgb(0 0 0 / 18%); font-family: inherit; font-size: 13px; font-weight: 400; line-height: 1.5; text-align: left; white-space: normal; overflow-wrap: anywhere; }
+.help-tooltip[hidden] { display: none; }
+.help-mode [data-help] { cursor: help; }
+@media (hover: hover) { [data-help]:hover { outline-offset: 2px; } }
+@media (forced-colors: active) { .help-tooltip { color: CanvasText; background: Canvas; border-color: CanvasText; } }

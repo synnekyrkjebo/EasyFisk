@@ -4,7 +4,7 @@ import { NavLink } from "react-router-dom";
 const navigationItems = [
   { to: "/kart", label: "Kart", icon: Map },
   { to: "/fiskekort", label: "Fiskekort", icon: Ticket },
-  { to: "/fangst", label: "Loggfør", icon: Plus },
+  { to: "/fangst", label: "Rapporter", icon: Plus },
   { to: "/feed", label: "Feed", icon: Users },
   { to: "/profil", label: "Min side", icon: UserRound },
 ];

@@ -1,0 +1,78 @@
+.community-section { margin: 22px 0; padding: 18px 14px; border: 1px solid #e2e7e4; border-radius: 16px; background: #fff; }
+.community-section h2 { margin-top: 0; font-size: 18px; color: #07513d; }
+.community-section > summary { color: #07513d; font-size: 17px; font-weight: 700; cursor: pointer; }
+.section-title { margin: 22px 0; }
+.metrics { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 10px; margin: 18px 0; }
+.metric { display: grid; align-content: start; gap: 6px; padding: 14px 7px; border-radius: 12px; background: #eaf3ec; text-align: center; }
+.metric strong { color: #07513d; font-size: 24px; font-variant-numeric: tabular-nums; }
+.metric span { font-size: 11px; color: #527066; line-height: 1.5; }
+.record-row { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 12px 0; border-bottom: 1px solid #e2e7e4; font-size: 13px; }
+.record-row span { text-align: right; }
+.chart-row { margin: 16px 0; font-size: 12px; }
+.chart-row > div { display: flex; justify-content: space-between; gap: 12px; margin-bottom: 7px; }
+.chart-row strong { text-align: right; }
+progress { display: block; width: 100%; height: 8px; border: 0; border-radius: 6px; overflow: hidden; accent-color: #176b43; background: #e8eeea; }
+progress::-webkit-progress-bar { background: #e8eeea; border-radius: 6px; }
+progress::-webkit-progress-value { background: #176b43; border-radius: 6px; }
+progress::-moz-progress-bar { background: #176b43; border-radius: 6px; }
+.badge-grid { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 10px; margin-top: 16px; }
+.badge-card { padding: 14px 10px; border: 1px solid #e2e7e4; border-radius: 12px; background: #f7f8f6; text-align: center; }
+.badge-icon { display: block; font-size: 28px; filter: grayscale(1); }
+.badge-card.is-earned { background: #eaf3ec; border-color: #a9cfb5; }
+.badge-card.is-earned .badge-icon { filter: none; }
+.badge-card h3 { margin: 10px 0 6px; font-size: 13px; }
+.badge-card p { min-height: 45px; color: #527066; font-size: 11px; line-height: 1.5; }
+.badge-card > strong { color: #176b43; font-size: 12px; }
+.challenge-card { display: grid; gap: 12px; margin-top: 18px; padding-bottom: 18px; border-bottom: 1px solid #e2e7e4; }
+.challenge-card h3, .challenge-card p { margin: 0; font-size: 13px; line-height: 1.5; }
+.challenge-card p { color: #527066; }
+.challenge-card .account-button { justify-self: start; }
+.challenge-card > strong { color: #176b43; font-size: 12px; }
+.profile-hero { margin-top: 22px; text-align: center; }
+.profile-hero h2 { margin-bottom: 8px; color: #07513d; font-size: 22px; }
+.profile-hero > p { font-size: 13px; line-height: 1.6; white-space: pre-wrap; }
+.avatar { display: grid; flex-shrink: 0; overflow: hidden; border-radius: 50%; color: #07513d; background: #dceee3; place-items: center; font-weight: 700; }
+.avatar-large { width: 84px; height: 84px; margin: 0 auto; font-size: 34px; }
+.avatar-small { width: 34px; height: 34px; font-size: 15px; object-fit: cover; }
+.avatar-image { width: 100%; height: 100%; object-fit: cover; }
+.profile-visibility { color: #527066; font-size: 12px; }
+.profile-gallery { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 10px; }
+.profile-gallery > p { grid-column: 1 / -1; }
+.profile-gallery figure { margin: 0; min-width: 0; }
+.profile-gallery img { height: 130px; border-radius: 10px; }
+.profile-gallery figcaption { padding: 6px 0; font-size: 11px; line-height: 1.5; }
+.follow-chips { display: flex; flex-wrap: wrap; gap: 7px; margin: 12px 0; }
+.follow-chip { padding: 6px 9px; border-radius: 16px; color: #07513d; background: #eaf3ec; font-size: 12px; }
+.feed-tabs { display: grid; grid-template-columns: 1fr 1fr; margin: 20px 0 14px; padding: 4px; border-radius: 12px; background: #e8eeea; }
+.feed-tabs button { padding: 11px; border: 0; border-radius: 9px; color: #527066; background: transparent; font: inherit; font-size: 14px; font-weight: 650; cursor: pointer; }
+.feed-tabs button[aria-selected="true"] { color: #07513d; background: #fff; box-shadow: 0 2px 6px rgb(9 75 46 / 8%); }
+.follow-button { display: grid; width: 44px; height: 44px; margin: 0; padding: 9px; place-items: center; }
+.follow-button svg { width: 24px; height: 24px; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+.feed-post { margin: 18px 0; padding: 16px; overflow: hidden; border: 1px solid #e2e7e4; border-radius: 16px; background: #fff; }
+.post-header { display: flex; align-items: center; gap: 9px; margin-bottom: 14px; }
+.post-author { color: #07513d; font-size: 13px; font-weight: 700; text-decoration: none; }
+.post-kind { margin-left: auto; color: #527066; font-size: 11px; }
+.community-photo { display: block; width: 100%; max-height: 380px; object-fit: cover; }
+.feed-post > .community-photo { border-radius: 10px; }
+.feed-post h2 { font-size: 17px; line-height: 1.5; }
+.post-caption { font-size: 14px; line-height: 1.6; white-space: pre-wrap; overflow-wrap: anywhere; }
+.record-label { padding: 5px 8px; border-radius: 8px; color: #795015; background: #fff1d3; font-size: 12px; }
+.post-interactions { display: flex; align-items: start; gap: 12px; padding-top: 14px; border-top: 1px solid #e2e7e4; }
+.reaction-button { padding: 7px 10px; border: 1px solid #dbe5de; border-radius: 8px; color: #527066; background: #fff; font: inherit; font-size: 13px; cursor: pointer; }
+.reaction-button[aria-pressed="true"] { color: #07513d; background: #dceee3; }
+.post-comments { flex: 1; min-width: 0; font-size: 13px; }
+.post-comments summary { padding: 7px 0; color: #07513d; cursor: pointer; }
+.comment { margin: 12px 0; padding: 10px; border-radius: 10px; background: #f3f8f4; overflow-wrap: anywhere; }
+.comment p { margin-bottom: 0; line-height: 1.5; white-space: pre-wrap; }
+.comment-form { display: grid; gap: 8px; margin: 14px 0; }
+.comment-form .account-button { justify-self: end; }
+.feed-empty { padding: 24px 12px; color: #527066; font-size: 14px; line-height: 1.6; text-align: center; }
+.zone-overview-card { margin: 14px 0; padding: 15px; border: 1px solid #c8ded1; border-radius: 12px; background: #edf7f0; font-size: 13px; line-height: 1.6; }
+.zone-overview-card summary { color: #07513d; font-weight: 700; cursor: pointer; }
+.follow-choice { display: flex; align-items: center; gap: 10px; padding: 12px 0; border-bottom: 1px solid #e2e7e4; font-size: 13px; cursor: pointer; }
+.follow-choice input { width: 18px; height: 18px; accent-color: #176b43; }
+textarea.checkout-input { resize: vertical; min-height: 80px; }
+
+.notification-item { display: block; margin: 14px 0; padding: 12px; border-radius: 10px; color: #07513d; background: #edf7f0; font-size: 13px; line-height: 1.6; text-decoration: none; }
+
+.feed-heading { display: flex; align-items: center; justify-content: space-between; gap: 16px; }

@@ -10,6 +10,8 @@ const pages = {
   ticket: "fiskekort.html",
   profile: "minside.html",
   sessions: "loggfor.html",
+  feed: "feed.html",
+  statistics: "statistikk.html",
 };
 
 export default defineConfig(({ mode }) => ({

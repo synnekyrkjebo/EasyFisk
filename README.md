@@ -36,3 +36,13 @@ Profiler og fiskekort lagres i nettleserens localStorage; innloggingen gjelder i
 Ved kjøp for andre velges en venn eller mottakerens navn og e-post. Forhåndsvisning av kortmeldingen gir en kortlenke som virker i nettleseren der kortet ble lagret. Gruppekort gir ett kort per fisker, og kun mottakerens egne kort vises på profilen.
 
 For å vise hele brukerflyten kan en fiskeøkt startes på eget fiskekort uten sperrer for sesong, kortets tidsrom eller dokumenter. Én aktiv økt om gangen og validering av økt- og fangsttid beholdes. Sesong- og kortkontroller finnes i `scripts/shared/fishing-sessions.js` for senere tilkobling til faktisk tilgjengelighet.
+
+## Feed og profil
+
+Feed har faner for venner og fulgte soner. Fangster kan deles ved registrering og senere redigeres eller gjøres private igjen. Avsluttede økter kan også deles. Ingen deling er forhåndsvalgt, og GPS-koordinater publiseres ikke. Startinnleggene fra Kari, Per og Anne er innhold for prototypevisningen; de inngår aldri i brukerens personlige statistikk. Reaksjoner og kommentarer lagres lokalt.
+
+Min side har profilbilde, presentasjon, offentlig/privat profil, rekorder, merker, utfordringer og delte bilder. Min statistikk beregnes fra brukerens egne økter, inkludert nullfangstøkter. Månedstall bruker norsk tid. En offentlig profil viser statistikk og merker; kontaktopplysninger holdes skjult, og fangstbilder følger delingsvalgene.
+
+Rask rapportering krever at fangsten registreres innen ti minutter. Fiskestreak krever tre fiskedager på rad. Komplette fangstrapporter krever art, vekt, lengde, tidspunkt, utfall, GPS og bilde. Miljøregistreringer og ryddeaktiviteter lagres på egen profil. Fiskereglene kan bekreftes fra Min side eller ved bestilling. Sanntidsvarsler om regler, vannstand og stenginger krever en ekstern datakilde; soneoversikten lenker til informasjon om forholdene.
+
+Kjør `npm test` for å kontrollere statistikk, personvern, deling, merker og lokal lagring.

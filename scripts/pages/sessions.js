@@ -1,3 +1,4 @@
+import {ZONE_FEED_ENABLED} from "../shared/features.js";
 import { getCurrentUser } from "../shared/auth.js";
 import { listDemoTickets } from "../shared/demo-tickets.js";
 import { SPECIES, localTime, parseTime, validateCatch, listSessions, saveSession, ticketCoversSession } from "../shared/fishing-sessions.js";
@@ -82,6 +83,7 @@ function render() {
   $("#session-period").textContent = `${format(current.start)}${current.end ? ` – ${format(current.end)}` : " · Økten pågår"}`;
   $("#session-timer").hidden = Boolean(current.end); tick();
   $("#end-session").hidden = Boolean(current.end);
+  $("#share-session").hidden = !current.end;
   $("#catch-list").replaceChildren();
   if (!current.catches.length) $("#catch-list").append(element("p", "Ingen fangster registrert ennå.", "account-status"));
   for (const fish of current.catches) {
@@ -130,6 +132,9 @@ function openCatch(fish) {
   $("#fish-species").value = fish?.species || SPECIES[0];
   $("#fish-weight").value = fish?.weight || ""; $("#fish-length").value = fish?.length || "";
   $("#fish-outcome").value = fish?.outcome || "released";
+  $("#fish-caption").value = fish?.caption || "";
+  $("#fish-share-friends").checked = Boolean(fish?.share?.friends);
+  $("#fish-share-zone").checked = Boolean(fish?.share?.zone);
   $("#fish-time").value = localTime(fish?.time || current.end || new Date());
   $("#fish-time").min = localTime(current.start); $("#fish-time").max = localTime(current.end || new Date());
   $("#fish-lat").value = fish?.gps?.lat ?? ""; $("#fish-lng").value = fish?.gps?.lng ?? "";
@@ -166,10 +171,10 @@ $("#catch-form").addEventListener("submit", async event => {
   try {
     const lat = $("#fish-lat").value, lng = $("#fish-lng").value;
     if (Boolean(lat) !== Boolean(lng)) throw new Error("Fyll inn begge GPS-koordinatene eller la begge stå tomme.");
-    const fish = { id: editingFish?.id || crypto.randomUUID(), species: $("#fish-species").value, weight: Number($("#fish-weight").value), length: Number($("#fish-length").value), time: parseTime($("#fish-time").value), outcome: $("#fish-outcome").value, gps: lat && lng ? { lat: Number(lat), lng: Number(lng) } : null, photo: selectedPhoto || null };
+    const fish = { id: editingFish?.id || crypto.randomUUID(), species: $("#fish-species").value, weight: Number($("#fish-weight").value), length: Number($("#fish-length").value), time: parseTime($("#fish-time").value), outcome: $("#fish-outcome").value, gps: lat && lng ? { lat: Number(lat), lng: Number(lng) } : null, photo: selectedPhoto || null, caption: $("#fish-caption").value.trim(), share: { friends: $("#fish-share-friends").checked, zone: $("#fish-share-zone").checked }, createdAt: editingFish?.createdAt || new Date().toISOString() };
     validateCatch(fish, current);
     const catches = editingFish ? current.catches.map(item => item.id === editingFish.id ? fish : item) : [...current.catches, fish];
-    await saveSession(user, { ...current, catches }); await refresh(); $("#catch-dialog").close(); $("#session-status").textContent = "Fangsten er lagret.";
+    await saveSession(user, { ...current, catches }); await refresh(); $("#catch-dialog").close(); $("#session-status").textContent = fish.share.friends || (ZONE_FEED_ENABLED && fish.share.zone) ? "Fangsten er lagret og delt i valgt feed." : "Fangsten er lagret privat.";
   } catch (error) { $("#catch-status").textContent = message(error); }
   finally { busy = false; $("#save-catch").disabled = false; }
 });
@@ -190,3 +195,20 @@ getCurrentUser().then(async account => {
 }).catch(() => { $("#session-status").textContent = "Kunne ikke hente øktene. Prøv igjen."; });
 const timer = setInterval(() => { tick(); updateStart(); }, 1000);
 window.addEventListener("pagehide", () => { clearInterval(timer); imageUrls.forEach(url => URL.revokeObjectURL(url)); if (previewUrl) URL.revokeObjectURL(previewUrl); });
+
+$("#share-session").addEventListener("click", () => {
+  $("#session-caption").value = current.caption || "";
+  $("#session-share-friends").checked = Boolean(current.share?.friends);
+  $("#session-share-zone").checked = Boolean(current.share?.zone);
+  $("#share-status").textContent = ""; $("#share-dialog").showModal();
+});
+$("#cancel-share").addEventListener("click", () => $("#share-dialog").close());
+$("#share-form").addEventListener("submit", async event => {
+  event.preventDefault(); if (busy || !$("#share-form").reportValidity()) return;
+  busy = true; $("#save-share").disabled = true;
+  try {
+    await saveSession(user, { ...current, caption: $("#session-caption").value.trim(), share: { friends: $("#session-share-friends").checked, zone: $("#session-share-zone").checked } });
+    await refresh(); $("#share-dialog").close(); $("#session-status").textContent = "Delingen av økten er oppdatert.";
+  } catch(error) { $("#share-status").textContent = message(error); }
+  finally { busy = false; $("#save-share").disabled = false; }
+});

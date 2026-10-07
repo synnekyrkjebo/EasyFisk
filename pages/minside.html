@@ -8,6 +8,7 @@
   <link rel="stylesheet" href="../styles/main.css?v=20261007-3">
   <link rel="stylesheet" href="../styles/purchase.css?v=20261001-29">
   <link rel="stylesheet" href="../styles/tooltips.css?v=20261007-4">
+  <link rel="stylesheet" href="../styles/community.css?v=20261007-5">
 </head>
 <body>
   <div class="purchase-page tickets-page">
@@ -32,15 +33,28 @@
         <a class="continue-button" id="profile-login" href="logginn.html">Logg inn</a>
         <a class="guest-return" id="profile-signup" href="registrer.html">Registrer bruker</a>
       </section>
-      <section class="selection-card" id="profile-account" hidden>
-        <h2>Din profil</h2>
-        <dl class="profile-details">
-          <div><dt>Navn</dt><dd id="profile-name"></dd></div>
-          <div><dt>E-post</dt><dd id="profile-email"></dd></div>
-          <div><dt>Telefonnummer</dt><dd id="profile-phone"></dd></div>
-        </dl>
-        <a class="continue-button" href="fiskekort.html">Mine fiskekort</a>
-      </section>
+      <div id="profile-account" hidden>
+        <section class="profile-hero"><div id="profile-avatar" class="avatar avatar-large"></div><h2 id="profile-name"></h2><p id="profile-bio"></p><span class="profile-visibility" id="profile-visibility"></span><div class="metrics" id="profile-metrics"></div>
+          <button class="account-button owner-only" id="edit-profile" type="button">Rediger profil</button>
+          <a class="continue-button owner-only" href="statistikk.html">Min statistikk</a>
+        </section>
+        <div id="profile-private" class="feed-empty" hidden>Profilen er privat.</div>
+        <div id="profile-details">
+          <section class="community-section"><h2>Personlige rekorder</h2><div id="profile-records"></div></section>
+          <details class="community-section" open><summary>Merker</summary><p class="account-status">Merker viser innsatsen din langs elva, også turer uten fangst.</p><div class="badge-grid" id="profile-badges"></div></details>
+          <details class="community-section owner-only"><summary>Frivillige utfordringer</summary><p class="account-status">Delta når du vil. Fullførte utfordringer gir digitale merker.</p><div id="profile-challenges"></div></details>
+          <section class="community-section"><h2>Delte fangstbilder</h2><div class="profile-gallery" id="profile-gallery"></div></section>
+          <section class="community-section"><h2>Venner</h2><p class="account-status" id="profile-follows"></p><div class="follow-chips" id="profile-friends"></div><div class="follow-chips" id="profile-zones" hidden></div><a class="account-button owner-only" href="feed.html">Administrer venner</a></section>
+          <details class="community-section owner-only" id="profile-rules"><summary>Årets fiskeregler</summary><p class="account-status">Les de gjeldende reglene før du fisker.</p><a class="account-button" href="https://lakseelver.no/nb/elver/mandalselva/about" target="_blank" rel="noopener">Les fiskereglene</a><form id="rules-form"><label class="recipient-option session-confirm"><input type="checkbox" id="profile-read-rules" required> Jeg har lest og forstått årets oppdaterte fiskeregler.</label><button class="continue-button" type="submit">Bekreft fiskeregler</button><p class="account-status" id="rules-result" role="status"></p></form></details>
+          <details class="community-section owner-only" id="profile-environment"><summary>Miljø og rydding</summary><form id="environment-form">
+            <label class="checkout-label" for="environment-kind">Hva vil du registrere?</label><select class="checkout-input" id="environment-kind"><option value="environment">Forsøpling eller miljøproblem</option><option value="cleanup">Deltatt på ryddeaktivitet</option></select>
+            <label class="checkout-label" for="environment-place">Sone</label><select class="checkout-input" id="environment-place" required></select>
+            <label class="checkout-label" for="environment-text">Beskriv observasjonen eller aktiviteten</label><textarea class="checkout-input" id="environment-text" maxlength="500" rows="3" required></textarea>
+            <button class="continue-button" id="save-environment" type="submit">Registrer aktivitet</button><p class="account-status" id="environment-result" role="status"></p>
+          </form></details>
+          <details class="community-section owner-only"><summary>Kontaktopplysninger</summary><dl class="profile-details"><div><dt>E-post</dt><dd id="profile-email"></dd></div><div><dt>Telefonnummer</dt><dd id="profile-phone"></dd></div></dl><a class="account-button" href="fiskekort.html">Mine fiskekort</a></details>
+        </div>
+      </div>
       <p class="account-status" id="profile-status" role="status"></p>
     </main>
     <nav class="bottom-nav" aria-label="Hovedmeny">
@@ -58,7 +72,7 @@
         </span>
         <span>Rapporter</span>
       </a>
-      <a class="nav-item" href="index.html#feed">
+      <a class="nav-item" href="feed.html">
         <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="8" cy="8" r="3"/><circle cx="17" cy="9" r="2.5"/><path d="M2 20c0-4 2.5-7 6-7s6 3 6 7M14 14c4-1 7 1.5 7 5"/></svg>
         <span>Feed</span>
       </a>
@@ -68,7 +82,17 @@
       </a>
     </nav>
   </div>
-  <script type="module" src="../scripts/pages/profile.js?v=20261001-31"></script>
-  <script type="module" src="../scripts/shared/tooltips.js?v=20261007-4"></script>
+  <dialog class="message-dialog" id="profile-dialog" aria-labelledby="profile-edit-heading"><form id="profile-form"><h2 id="profile-edit-heading">Rediger profil</h2>
+    <label class="checkout-label" for="profile-edit-name">Navn</label><input class="checkout-input" id="profile-edit-name" required maxlength="120">
+    <label class="checkout-label" for="profile-edit-bio">Kort presentasjon</label><textarea class="checkout-input" id="profile-edit-bio" rows="3" maxlength="300"></textarea>
+    <label class="checkout-label" for="profile-edit-photo">Profilbilde</label><input class="checkout-input" id="profile-edit-photo" type="file" accept="image/jpeg,image/png,image/webp,image/gif">
+    <label class="checkout-label" for="profile-edit-visibility">Profilens synlighet</label><select class="checkout-input" id="profile-edit-visibility"><option value="private">Privat profil</option><option value="public">Offentlig profil</option></select>
+    <p class="account-status">En offentlig profil viser presentasjon, statistikk og merker. Fangster deles bare når du velger det ved registrering.</p>
+    <p class="account-status" id="profile-edit-status" role="status"></p><button class="continue-button" id="save-profile" type="submit">Lagre profil</button><button class="account-button dialog-cancel" id="cancel-profile" type="button">Avbryt</button>
+  </form></dialog>
+  <script src="../scripts/data/fishing-places.js?v=20261001-7"></script>
+  <script type="module" src="../scripts/pages/profile.js?v=20261007-8"></script>
+  <script type="module" src="../scripts/shared/tooltips.js?v=20261007-8"></script>
+  <script type="module" src="../scripts/shared/notifications.js?v=20261007-8"></script>
 </body>
 </html>

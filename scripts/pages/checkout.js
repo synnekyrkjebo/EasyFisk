@@ -1,3 +1,4 @@
+import { recordActivity } from "../shared/social-store.js";
 import { readBooking, bookingUrl } from "../shared/booking.js";
 import { addDays } from "../shared/purchase-calendar.js";
 import { getCurrentUser } from "../shared/auth.js";
@@ -145,6 +146,7 @@ if (!booking) {
         return person ? { ...person, delivery: field.getDeliveryMethod() } : null;
       }).filter(Boolean);
       const people = buyForOthers.checked ? others : [{ ...user, delivery: "in-app" }, ...others];
+      await recordActivity(user, "rules", { version: "2026-08-01" }).catch(() => {});
       const id = completeDemoOrder(booking, user, people, acceptRules.checked);
       const url = new URL("fiskekort.html", window.location.href);
       url.searchParams.set("bestilt", id);

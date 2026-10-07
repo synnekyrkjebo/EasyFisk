@@ -73,7 +73,7 @@ export async function listSessions(user) {
 }
 export async function saveSession(user, session) {
   validateSession(session);
-  return transaction("readwrite", store => store.put({ ...session, email: user.email.toLowerCase() }));
+  return transaction("readwrite", store => store.put({ ...session, email: user.email.toLowerCase(), authorName: user.name }));
 }
 
 export function ticketCoversSession(ticket, start, end = start) {
@@ -92,4 +92,23 @@ export function ticketCoversSession(ticket, start, end = start) {
     }
   }
   return false;
+}
+
+export async function listSharedSessions() {
+  const sessions = await transaction("readonly", store => store.getAll());
+  const recordIds = new Set(), lengths = {};
+  for (const entry of sessions.flatMap(session => session.catches.map(fish => ({...fish,email:session.email}))).sort((a,b) => new Date(a.time)-new Date(b.time))) {
+    const key = `${entry.email}:${entry.species}`;
+    if (lengths[key] && entry.length > lengths[key]) recordIds.add(entry.id);
+    lengths[key] = Math.max(lengths[key] || 0, entry.length);
+  }
+  return sessions.map(session => ({ id: session.id, email: session.email, authorName: session.authorName || "Fisker",
+    place: session.place, start: session.start, end: session.end, share: session.share || {}, caption: session.caption || "",
+    catches: session.catches.filter(fish => fish.share?.friends || fish.share?.zone).map(({id,species,weight,length,time,photo,share,caption,createdAt}) => ({id,species,weight,length,time,photo,share,caption,createdAt,personalRecord:recordIds.has(id)}))
+  })).filter(session => session.share.friends || session.share.zone || session.catches.length);
+}
+
+export async function listPublicProfileSessions(profile) {
+  if (profile.visibility !== "public") return [];
+  return (await transaction("readonly", store => store.getAll())).filter(session => session.email === profile.id);
 }

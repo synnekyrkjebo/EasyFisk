@@ -45,7 +45,7 @@ export function authReturnUrl(currentUrl) {
   if (!returnTo) return fallback;
   try {
     const candidate = new URL(returnTo, current);
-    const allowed = ["bestilling.html", "fiskekort.html", "minside.html", "loggfor.html"].map(page => new URL(page, current).pathname);
+    const allowed = ["bestilling.html", "fiskekort.html", "minside.html", "loggfor.html", "feed.html", "statistikk.html"].map(page => new URL(page, current).pathname);
     if (candidate.origin === current.origin && allowed.includes(candidate.pathname)) return candidate;
   } catch { /* Bruk kalenderen hvis returadressen er ugyldig. */ }
   return fallback;

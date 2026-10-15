@@ -1,7 +1,8 @@
+import {existsSync} from "node:fs";
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {calculateStatistics,achievements,challenges,personalRecordIds} from '../scripts/shared/statistics.js';
-import {activityPosts,visiblePosts,zoneOverview} from '../scripts/shared/community.js';
+import {activityPosts,visiblePosts,zoneOverview,initialPosts} from '../scripts/shared/community.js';
 import {saveSession,listSessions,listSharedSessions,listPublicProfileSessions} from '../scripts/shared/fishing-sessions.js';
 import {getProfile,saveProfile,recordActivity,listActivity,getReactions,toggleReaction,addComment,publicProfileActivity} from '../scripts/shared/social-store.js';
 
@@ -66,4 +67,11 @@ test('profile changes, follows and avatar persist per user; private-profile acti
 test('likes toggle without duplicates and comments persist with bounded text',async()=>{
  databases.clear();await toggleReaction('post',user);assert.equal((await getReactions('post')).likes.length,1);await toggleReaction('post',user);assert.equal((await getReactions('post')).likes.length,0);
  await addComment('post',user,' Fin fisk! ');assert.equal((await getReactions('post')).comments[0].text,'Fin fisk!');await assert.rejects(addComment('post',user,' '));await assert.rejects(addComment('post',user,'a'.repeat(501)));
+});
+
+test('initial feed posts have local images and descriptive alternatives',()=>{
+ for(const post of initialPosts(now)){
+  assert.ok(post.imageAlt);
+  assert.ok(existsSync(new URL(post.imageUrl)), post.imageUrl);
+ }
 });

@@ -1,0 +1,13 @@
+{
+  "mode": "Built-in image_gen",
+  "assets": [
+    {
+      "path": "assets/feed/salmon.png",
+      "prompt": "Use case: photorealistic-natural. Asset type: photo for an Atlantic salmon catch post in a Norwegian fishing app prototype. Primary request: a candid smartphone close-up of one realistic silver Atlantic salmon about 62 cm long being gently supported horizontally with wet hands at the surface of a clear Norwegian river, fish staying in the water, pebbles visible underneath. Natural overcast daylight, realistic scales and proportions, landscape 4:3 composition, centered fish completely visible with breathing room, no faces, no writing, no logos, no watermark."
+    },
+    {
+      "path": "assets/feed/sea-trout.png",
+      "prompt": "Use case: photorealistic-natural. Asset type: photo for a sea trout catch post in a Norwegian fishing app prototype. Primary request: a candid smartphone photograph looking down at a single realistic silver sea trout about 44 cm long with characteristic dark spots, resting in a submerged knotless fishing net in a clear river beside smooth stones, fish at water surface. Soft evening daylight, realistic natural colors and proportions, landscape 4:3 composition, whole fish clearly visible centered, no writing, no logos, no watermark."
+    }
+  ]
+}

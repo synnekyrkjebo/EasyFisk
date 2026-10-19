@@ -1,5 +1,11 @@
 import { localTime } from "./fishing-sessions.js";
 
+const POST_IMAGES = {
+  salmon: new URL("../../assets/feed/salmon.png", import.meta.url).href,
+  seaTrout: new URL("../../assets/feed/sea-trout.png", import.meta.url).href,
+  river: new URL("../../assets/inatur/61fd291caa826b7f6d5e2e10-1.jpg", import.meta.url).href,
+};
+
 export function activityPosts(sessions) {
   const posts = [];
   for (const session of sessions) {
@@ -26,9 +32,9 @@ export function zoneOverview(posts, name, now = new Date()) {
 export function initialPosts(now = new Date()) {
   const date = days => new Date(now.getTime() - days * 86400000).toISOString();
   return [
-    { id: "community:kari", kind: "catch", author: {email:"kari@example.com",name:"Kari Hansen"}, place:{name:"Bringsdal",zone:"Sone 2"}, time:date(1), species:"Laks", length:62, weight:2.4, caption:"En fin tur langs elva. Fisken ble satt tilbake.", share:{friends:true,zone:true}, outcome:"released" },
-    { id: "community:per", kind: "session", author: {email:"per@example.com",name:"Per Olsen"}, place:{name:"Furuholmen",zone:"Sone 2"}, time:date(2), start:date(2), end:new Date(new Date(date(2)).getTime()+7200000).toISOString(), caption:"To timer ute, ingen fangst. Likevel en god dag ved elva.", share:{friends:true,zone:true} },
-    { id: "community:anne", kind: "catch", author:{email:"anne@example.com",name:"Anne Berg"}, place:{name:"Bringsdal",zone:"Sone 2"}, time:date(3), species:"Sjøørret",length:44,weight:0.9,caption:"Første sjøørret denne sesongen!",share:{friends:true,zone:true},outcome:"released" },
+    { id: "community:kari", imageUrl: POST_IMAGES.salmon, imageAlt: "Laks holdt ved vannflaten i en elv", kind: "catch", author: {email:"kari@example.com",name:"Kari Hansen"}, place:{name:"Bringsdal",zone:"Sone 2"}, time:date(1), species:"Laks", length:62, weight:2.4, caption:"En fin tur langs elva. Fisken ble satt tilbake.", share:{friends:true,zone:true}, outcome:"released" },
+    { id: "community:per", imageUrl: POST_IMAGES.river, imageAlt: "Elva ved Furuholmen", kind: "session", author: {email:"per@example.com",name:"Per Olsen"}, place:{name:"Furuholmen",zone:"Sone 2"}, time:date(2), start:date(2), end:new Date(new Date(date(2)).getTime()+7200000).toISOString(), caption:"To timer ute, ingen fangst. Likevel en god dag ved elva.", share:{friends:true,zone:true} },
+    { id: "community:anne", imageUrl: POST_IMAGES.seaTrout, imageAlt: "Sjøørret i en håv ved vannflaten", kind: "catch", author:{email:"anne@example.com",name:"Anne Berg"}, place:{name:"Bringsdal",zone:"Sone 2"}, time:date(3), species:"Sjøørret",length:44,weight:0.9,caption:"Første sjøørret denne sesongen!",share:{friends:true,zone:true},outcome:"released" },
   ];
 }
 export const monthLabel = key => new Intl.DateTimeFormat("nb-NO", {month:"long",year:"numeric",timeZone:"UTC"}).format(new Date(`${key}-15T12:00:00Z`));

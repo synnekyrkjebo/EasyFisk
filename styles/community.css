@@ -76,3 +76,5 @@ textarea.checkout-input { resize: vertical; min-height: 80px; }
 .notification-item { display: block; margin: 14px 0; padding: 12px; border-radius: 10px; color: #07513d; background: #edf7f0; font-size: 13px; line-height: 1.6; text-decoration: none; }
 
 .feed-heading { display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+
+.feed-post > .feed-image { aspect-ratio: 4 / 3; height: auto; object-fit: cover; }

@@ -28,6 +28,11 @@ async function render(){
   const avatar=authorProfile?.avatar?photo(authorProfile.avatar,`Profilbilde av ${name}`,'avatar avatar-small'):el('span',name.slice(0,1),'avatar avatar-small');
   header.append(avatar,author,el('span',post.kind==='session'?'Fiskeøkt':'Fangst','post-kind'));card.append(header);
   if(post.photo)card.append(photo(post.photo,`${post.species}, ${post.length} cm`));
+  else if(post.imageUrl){
+    const image=el('img','','community-photo feed-image');
+    image.src=post.imageUrl;image.alt=post.imageAlt;image.loading='lazy';image.decoding='async';
+    card.append(image);
+  }
   if(post.kind==='catch'){
    card.append(el('h2',`${post.species} · ${number(post.length)} cm${post.weight?` · ${number(post.weight)} kg`:''}`));
    if(post.personalRecord)card.append(el('span','🏆 Personlig rekord','record-label'));

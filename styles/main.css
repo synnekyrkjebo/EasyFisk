@@ -529,6 +529,29 @@ button:focus-visible, a:focus-visible {
   z-index: 1200;
 }
 
+.map-purchase-button {
+  position: absolute;
+  z-index: 1000;
+  top: 12px;
+  right: 12px;
+  left: 68px;
+  width: fit-content;
+  max-width: calc(100% - 80px);
+  margin-left: auto;
+  padding: 13px 16px;
+  border-radius: 12px;
+  background: #07513d;
+  color: #fff;
+  box-shadow: 0 3px 12px rgb(0 0 0 / 18%);
+  font-size: 14px;
+  font-weight: 700;
+  text-align: center;
+  text-decoration: none;
+}
+
+.map-purchase-button:hover { background: #063e2f; }
+.map-purchase-button:focus-visible { outline: 3px solid #ef9f2f; outline-offset: 3px; }
+
 .leaflet-control-zoom {
   overflow: hidden;
   border: 0 !important;

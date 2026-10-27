@@ -2,6 +2,7 @@ import { readDemoTicket, listDemoTickets, readDemoOrder } from "../shared/demo-t
 import { addDays } from "../shared/purchase-calendar.js";
 import { getCurrentUser } from "../shared/auth.js";
 import { showFishingDocuments } from "../shared/fishing-documents.js";
+import { renderTicketQr, ticketUrl } from "../shared/ticket-qr.js";
 
 const token = new URLSearchParams(window.location.search).get("kort");
 const ticket = readDemoTicket(token);
@@ -52,7 +53,11 @@ if (!token) {
       logUrl.searchParams.set("kort", card.token);
       logLink.href = logUrl.href;
       logLink.textContent = "Loggfør på dette kortet";
-      section.append(heading, recipient, dates, logLink);
+      const openLink = document.createElement("a");
+      openLink.className = "account-button";
+      openLink.href = ticketUrl(card.token, window.location.href);
+      openLink.textContent = "Åpne fiskekortet";
+      section.append(heading, recipient, dates, openLink, logLink);
       document.querySelector("#ordered-tickets").append(section);
     }
   }).catch(() => { status.textContent = "Kunne ikke hente fiskekortene. Prøv å logge inn på nytt."; });
@@ -65,6 +70,7 @@ if (!token) {
   document.querySelector("#ticket-place").textContent = `${booking.place.zone} – ${name}`;
   document.querySelector("#ticket-recipient").textContent = recipient.name;
   document.querySelector("#ticket-buyer").textContent = `Valgt til deg av ${ticket.buyerName}.`;
+  renderTicketQr(document.querySelector("#ticket-content .selection-card"), token);
   const format = new Intl.DateTimeFormat("nb-NO", { day: "numeric", month: "long", year: "numeric", timeZone: "UTC" });
   const dateLabel = key => format.format(new Date(`${key}T12:00:00Z`));
   for (const key of booking.dates) {

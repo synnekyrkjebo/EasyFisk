@@ -61,6 +61,7 @@ async function refresh(id = current?.id) {
   sessions = await listSessions(user);
   current = sessions.find(session => session.id === id) || sessions.find(session => !session.end);
   render(); updateStart();
+  window.dispatchEvent(new CustomEvent("easyfisk:sessions-changed", { detail: { sessions } }));
 }
 function tick() {
   if (!current || current.end) return;

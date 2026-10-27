@@ -17,12 +17,15 @@ banner.append(heading, elapsed, action);
 link?.closest('.bottom-nav')?.append(banner);
 let timer;
 let revision = 0;
-async function update() {
+async function update(event) {
   if (!link) return;
   const request = ++revision;
   try {
-    const user = await getCurrentUser();
-    const sessions = user ? await listSessions(user) : [];
+    let sessions = event?.detail?.sessions;
+    if (!Array.isArray(sessions)) {
+      const user = await getCurrentUser();
+      sessions = user ? await listSessions(user) : [];
+    }
     if (request !== revision) return;
     const session = sessions.find(session => !session.end);
     const active = Boolean(session);

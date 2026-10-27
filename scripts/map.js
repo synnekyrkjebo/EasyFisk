@@ -126,9 +126,14 @@ zoneLabels.forEach((zone) => {
 });
 
 let selectedMarker;
+// Expand touch targets without making the visible dots overlap more.
+const markerRenderer = window.matchMedia("(any-pointer: coarse)").matches
+  ? L.canvas({ tolerance: 18 })
+  : L.svg();
 
 fishingPlaces.forEach((place) => {
   const marker = L.circleMarker([place.lat, place.lng], {
+    renderer: markerRenderer,
     radius: 7,
     color: "#ffffff",
     weight: 2,
@@ -168,7 +173,7 @@ map.fitBounds(fishingPlaces.map((place) => [place.lat, place.lng]), { padding: [
 
 let userLocationMarker;
 let centerOnNextLocation = false;
-const locateControl = L.control({ position: "bottomright" });
+const locateControl = L.control({ position: "topright" });
 
 locateControl.onAdd = () => {
   const button = L.DomUtil.create("button", "map-location-button");

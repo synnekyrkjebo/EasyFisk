@@ -91,9 +91,12 @@ const zoneLabels = [
   { name: "Sone 4", lat: 58.405, lng: 7.585, className: "map-zone zone-label-4" },
 ];
 
+const placeMarkers = [];
+
 zoneLabels.forEach((zone) => {
-  L.marker([zone.lat, zone.lng], {
-    interactive: false,
+  const label = L.marker([zone.lat, zone.lng], {
+    title: `Zoom inn på ${zone.name}`,
+    alt: `Zoom inn på ${zone.name}`,
     icon: L.divIcon({
       className: zone.className,
       html: zone.name,
@@ -101,6 +104,25 @@ zoneLabels.forEach((zone) => {
       iconAnchor: [31, 15],
     }),
   }).addTo(map);
+
+  label.on("click", () => {
+    const places = fishingPlaces.filter((place) => place.zone === zone.name);
+    if (!places.length) return;
+
+    closeCard.click();
+    placeMarkers.forEach(({ place, marker }) => {
+      if (zone.name === "Sone 2" && place.zone !== "Sone 2") {
+        map.removeLayer(marker);
+      } else {
+        marker.addTo(map);
+      }
+    });
+    map.fitBounds(places.map((place) => [place.lat, place.lng]), {
+      padding: [40, 40],
+      maxZoom: 14,
+      animate: true,
+    });
+  });
 });
 
 let selectedMarker;
@@ -113,6 +135,8 @@ fishingPlaces.forEach((place) => {
     fillColor: "#07513d",
     fillOpacity: 1,
   }).addTo(map);
+
+  placeMarkers.push({ place, marker });
 
   marker.bindTooltip(place.name, {
     direction: "right",

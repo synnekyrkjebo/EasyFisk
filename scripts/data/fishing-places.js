@@ -6,6 +6,11 @@ const fishingPlaces = [
   { zone: "Sone 2", name: "Smeland", area: "Mandal–Holum", lat: 58.1, lng: 7.525 },
   { zone: "Sone 2", name: "Bjørkenes", area: "Mandal–Holum", lat: 58.114, lng: 7.529 },
   { zone: "Sone 2", name: "Fuskeland", area: "Mandal–Holum", lat: 58.13, lng: 7.535 },
+  // Veiledende plasseringer mellom Fuskeland og Fossefjellene, ikke oppmålte sonegrenser.
+  { zone: "Sone 2", name: "Holmesland A", area: "Øvre Holum – Holmesland", lat: 58.133, lng: 7.536 },
+  { zone: "Sone 2", name: "Holmesland B", area: "Øvre Holum – Holmesland", lat: 58.137, lng: 7.538 },
+  { zone: "Sone 2", name: "Holmesland C", area: "Øvre Holum – Holmesland", lat: 58.141, lng: 7.54 },
+  { zone: "Sone 2", name: "Holmesland P", area: "Øvre Holum – Holmesland", lat: 58.144, lng: 7.542 },
   { zone: "Sone 2", name: "Fossefjellene", area: "Mandal–Holum", lat: 58.147, lng: 7.544 },
   { zone: "Sone 2", name: "Øvre Holum", area: "Marnardal–Holum", lat: 58.164, lng: 7.552 },
   { zone: "Sone 2", name: "Heia", area: "Marnardal–Holum", lat: 58.179, lng: 7.545 },

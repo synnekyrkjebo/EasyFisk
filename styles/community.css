@@ -78,3 +78,12 @@ textarea.checkout-input { resize: vertical; min-height: 80px; }
 .feed-heading { display: flex; align-items: center; justify-content: space-between; gap: 16px; }
 
 .feed-post > .feed-image { aspect-ratio: 4 / 3; height: auto; object-fit: cover; }
+
+.badge-card { position: relative; }
+.badge-details-button { display: block; margin: 12px auto 0; padding: 6px 10px; border: 0; border-radius: 6px; background: transparent; color: #176b43; font: inherit; font-size: 12px; font-weight: 650; cursor: pointer; }
+.badge-details-button::after { content: ''; position: absolute; inset: 0; border-radius: 12px; }
+.badge-details-button:focus-visible { outline: 2px solid #176b43; outline-offset: 3px; }
+.badge-detail-list { list-style: none; padding: 0; margin: 18px 0; }
+.badge-detail-list li { display: grid; gap: 5px; padding: 12px 0; border-bottom: 1px solid #e2e7e4; }
+.badge-detail-list span { color: #527066; font-size: 13px; }
+.badge-dialog { width: min(90vw, 440px); }

@@ -73,7 +73,9 @@ export async function listSessions(user) {
 }
 export async function saveSession(user, session) {
   validateSession(session);
-  return transaction("readwrite", store => store.put({ ...session, email: user.email.toLowerCase(), authorName: user.name }));
+  const result = await transaction("readwrite", store => store.put({ ...session, email: user.email.toLowerCase(), authorName: user.name }));
+  if (typeof window !== "undefined") window.dispatchEvent(new Event("easyfisk:sessions-changed"));
+  return result;
 }
 
 export function ticketCoversSession(ticket, start, end = start) {

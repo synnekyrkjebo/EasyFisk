@@ -664,3 +664,21 @@ const inaturOffers = {
     }
   ]
 };
+
+// Delsonene har felles salgsside og bildegalleri hos Inatur.
+const holmeslandOffer = inaturOffers["Øvre Holum"][0];
+const holmeslandDescriptions = {
+  A: "Mulighet for teltoppstilling ved sonen, gapahuk og toalett med enkel standard.",
+  B: "Båt er inkludert i fiskekortet.",
+  C: "Gapahuk og toalett med enkel standard.",
+  P: "Gapahuk og toalett med enkel standard.",
+};
+
+for (const [letter, description] of Object.entries(holmeslandDescriptions)) {
+  inaturOffers[`Holmesland ${letter}`] = [{
+    ...holmeslandOffer,
+    title: `Mandalselva Sone 2 – Holmesland ${letter}`,
+    description: `Holmesland ${letter} er en av fire delsoner på vestsiden av Mandalselva i Øvre Holum. ${description} Dagskort gjelder kl. 18.00–17.59 neste dag. Gruppekort tilbys når alle kortene i sonen er ledige. Kartmarkøren viser en veiledende plassering; se Inatur og lokal oppmerking for fiskeområdet. Bildene er fra Holmeslands felles salgsside.`,
+    retrievedAt: "2026-10-27",
+  }];
+}

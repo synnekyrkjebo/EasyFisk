@@ -75,3 +75,14 @@ test('initial feed posts have local images and descriptive alternatives',()=>{
   assert.ok(existsSync(new URL(post.imageUrl)), post.imageUrl);
  }
 });
+
+test('badge details show visited zones and every session including zero-catch trips', async()=>{
+ const {achievementDetails}=await import('../scripts/shared/statistics.js');
+ const entries=[session('1','2026-10-01T08:00:00Z','2026-10-01T10:00:00Z'),session('2','2026-10-02T08:00:00Z',null,[],{place:{name:'Holmesland A',zone:'Sone 2'}}),session('3','2026-10-03T08:00:00Z','2026-10-03T09:00:00Z')];
+ assert.deepEqual(achievementDetails('Elveutforsker',entries,[],now),[{title:'Bringsdal',detail:'2 økter'},{title:'Holmesland A',detail:'1 økt'}]);
+ assert.equal(achievementDetails('Trofast fisker',entries,[],now).length,3);
+ assert.match(achievementDetails('Trofast fisker',entries,[],now)[1].detail,/Pågående/);
+ assert.deepEqual(achievementDetails('Trofast fisker',[],[],now),[]);
+ assert.equal(achievementDetails('Fiskestreak',entries,[],now).length,3);
+ assert.equal(achievementDetails('Morgenfisker',entries,[],now).length,0);
+});

@@ -144,3 +144,8 @@ button:focus-visible, a:focus-visible, select:focus-visible { outline: 2px solid
 .logged-catch h3 { font-size: 15px; }
 .length-warning { padding: 12px; border-radius: 8px; background: #fff1d3; color: #795015; font-size: 13px; line-height: 1.6; }
 .dialog-cancel { display: block; margin: 16px auto 0; }
+
+.ticket-qr { display: grid; justify-items: center; gap: 12px; margin-top: 20px; padding-top: 18px; border-top: 1px solid #e2e7e4; text-align: center; }
+.ticket-qr h3 { margin: 0; font-size: 15px; }
+.ticket-qr canvas { display: block; width: 240px; max-width: 100%; height: auto; background: #fff; border-radius: 8px; }
+.ticket-qr .account-status { margin: 0; }

@@ -1,5 +1,5 @@
 import {ZONE_FEED_ENABLED} from "./features.js";
-import { calculateStatistics, achievements, challenges } from "./statistics.js";
+import { calculateStatistics, achievements, challenges, achievementDetails } from "./statistics.js";
 import { monthLabel, prettyTime } from "./community.js";
 export const el = (tag, text = "", className = "") => { const node = document.createElement(tag); node.textContent = text; if(className)node.className=className; return node; };
 export const number = (value, decimals = 1) => new Intl.NumberFormat("nb-NO", {maximumFractionDigits:decimals}).format(value);
@@ -36,12 +36,24 @@ function bars(container,rows){
  for(const [name,value,label] of rows){const row=el("div","","chart-row");const title=el("div");title.append(el("span",name),el("strong",label||String(value)));const progress=el("progress");progress.max=maximum;progress.value=value;progress.setAttribute('aria-label',`${name}: ${label||value}`);row.append(title,progress);container.append(row);}
 }
 export function renderAchievements(container,sessions,activity){
+ const addDetails = (item, badge) => {
+  const button=el('button','Se detaljer','badge-details-button');button.type='button';button.setAttribute('aria-label',`Se detaljer for ${badge.name}`);button.setAttribute('aria-haspopup','dialog');
+  button.addEventListener('click',()=>{
+   const dialog=el('dialog','','message-dialog badge-dialog');const heading=el('h2',badge.name);heading.id='badge-detail-title';dialog.setAttribute('aria-labelledby',heading.id);
+   dialog.append(heading,el('p',badge.requirement||'Frivillig utfordring fullført','account-status'));
+   const rows=achievementDetails(badge.name,sessions,activity);
+   if(!rows.length)dialog.append(el('p','Ingen registreringer ennå. Her vises soner, økter eller aktiviteter som teller mot merket.','account-status'));
+   else {const list=el('ul','','badge-detail-list');for(const row of rows){const entry=el('li');entry.append(el('strong',row.title),el('span',row.detail));if(row.time)entry.append(el('span',prettyTime(row.time)));list.append(entry);}dialog.append(list);}
+   const close=el('button','Lukk','account-button');close.type='button';close.addEventListener('click',()=>dialog.close());dialog.append(close);
+   dialog.addEventListener('close',()=>{dialog.remove();button.focus();},{once:true});document.body.append(dialog);dialog.showModal();
+  });item.append(button);
+ };
  container.replaceChildren();for(const badge of achievements(sessions,activity)){
   const item=el("article","",`badge-card${badge.unlocked?' is-earned':''}`);const icon=el("span",badge.icon,"badge-icon");icon.setAttribute('aria-hidden','true');
-  item.append(icon,el("h3",badge.name),el("p",badge.requirement),el("strong",badge.unlocked?"Oppnådd":`${Math.min(badge.value,badge.goal)} / ${badge.goal}`));container.append(item);
+  item.append(icon,el("h3",badge.name),el("p",badge.requirement),el("strong",badge.unlocked?"Oppnådd":`${Math.min(badge.value,badge.goal)} / ${badge.goal}`));addDetails(item,badge);container.append(item);
  }
  for(const challenge of challenges(sessions,activity).filter(item=>item.completed)){
-  const item=el("article","","badge-card is-earned");item.append(el("span","🌿","badge-icon"),el("h3",challenge.name),el("p","Frivillig utfordring fullført"),el("strong","Oppnådd"));container.append(item);
+  const item=el("article","","badge-card is-earned");item.append(el("span","🌿","badge-icon"),el("h3",challenge.name),el("p","Frivillig utfordring fullført"),el("strong","Oppnådd"));addDetails(item,challenge);container.append(item);
  }
 }
 export function renderChallenges(container,sessions,activity){

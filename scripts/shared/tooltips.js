@@ -99,7 +99,7 @@ function hide() {
   active = null; tooltip.hidden = true;
 }
 function show(control) {
-  if (!control || control.closest("[hidden]")) return;
+  if (!helpMode || !control || control.closest("[hidden]")) return;
   hide(); active = control;
   // A tooltip inside a modal stays above the dialog's backdrop.
   (control.closest("dialog[open]") || document.body).append(tooltip);

@@ -76,3 +76,46 @@ export function challenges(sessions, activity, now = new Date()) {
   ];
   return entries.map(([name, requirement, value, goal, href]) => ({name,requirement,value,goal,href,completed:value>=goal}));
 }
+
+// Detail rows use only the sessions and activities available to the profile viewer.
+export function achievementDetails(name, sessions, activity, now = new Date()) {
+  const sessionRow = s => ({title: s.place.name, time: s.start, detail: `${s.end ? 'Avsluttet' : 'Pågående'} · ${s.catches.length} fangster`});
+  const fishRows = predicate => sessions.flatMap(s => s.catches.filter(predicate).map(f => ({title: `${f.species} · ${f.length} cm · ${f.weight} kg`, time: f.time, detail: s.place.name})));
+  const activityRows = predicate => activity.filter(predicate).map(a => ({title: a.place || (a.kind === 'rules' ? 'Fiskeregler bekreftet' : 'Aktivitet langs elva'), time: a.time, detail: a.text || a.version || ''}));
+  const key = month(now), current = sessions.filter(s => month(s.start) === key);
+  switch (name) {
+    case 'Elveutforsker': case 'Sonesamler':
+      return Object.entries(calculateStatistics(sessions, now).places).map(([title, count]) => ({title, detail: `${count} ${count === 1 ? 'økt' : 'økter'}`}));
+    case 'Artsutforsker':
+      return Object.entries(calculateStatistics(sessions, now).species).map(([title, count]) => ({title, detail: `${count} fangster`}));
+    case 'Første fangst': return fishRows(() => true);
+    case 'Nøyaktig rapportør': return fishRows(completeCatch);
+    case 'Rask rapportering': return fishRows(f => f.createdAt && new Date(f.createdAt) >= new Date(f.time) && new Date(f.createdAt) - new Date(f.time) <= 600000);
+    case 'Personlig rekord': { const ids = personalRecordIds(sessions); return fishRows(f => ids.has(f.id)); }
+    case 'Ansvarlig fisker': return activityRows(a => a.kind === 'rules');
+    case 'Miljøvenn': return activityRows(a => a.kind === 'environment');
+    case 'Morgenfisker': return sessions.filter(s => Number(localTime(s.start).slice(11,13)) < 7).map(sessionRow);
+    case 'Kveldsfisker': return sessions.filter(s => s.end && localTime(s.end).slice(11) > '21:00').map(sessionRow);
+    case 'Sesongstarter': return sessions.filter(s => day(s.start).slice(5) >= '06-01' && day(s.start).slice(5) <= '06-07').map(sessionRow);
+    case 'Fiskestreak': {
+      const days = [...new Set(sessions.map(s => day(s.start)))].sort();
+      let run = [], longest = [];
+      for (const date of days) {
+        if (run.length && new Date(`${date}T12:00:00Z`) - new Date(`${run.at(-1)}T12:00:00Z`) !== 86400000) run = [];
+        run.push(date); if (run.length > longest.length) longest = [...run];
+      }
+      return sessions.filter(s => longest.includes(day(s.start))).map(sessionRow);
+    }
+    case 'Tre turer denne måneden': return current.map(sessionRow);
+    case 'Utforsk en ny sone': {
+      const previous = new Set(sessions.filter(s => month(s.start) < key).map(s => s.place.name));
+      return current.filter(s => !previous.has(s.place.name)).map(sessionRow);
+    }
+    case 'Komplette fangster': return fishRows(f => month(f.time) === key && completeCatch(f));
+    case 'Hver tur teller': return current.filter(s => s.end && !s.catches.length).map(sessionRow);
+    case 'Oppdatert fisker': return activityRows(a => a.kind === 'rules' && a.version?.startsWith(String(now.getFullYear())));
+    case 'En renere elv': return activityRows(a => a.kind === 'cleanup' && month(a.time) === key);
+    case 'Første kast': case 'Trofast fisker': return sessions.map(sessionRow);
+    default: return [];
+  }
+}

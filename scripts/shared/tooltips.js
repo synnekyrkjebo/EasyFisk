@@ -17,11 +17,11 @@ const HELP = {
   "Publiser": "Legg til kommentaren din på dette innlegget.",
   "Lik innlegget": "Gi en reaksjon, eller fjern reaksjonen din ved å trykke igjen.",
   "Bekreft fiskeregler": "Lagre at du har lest reglene og oppdater merket Ansvarlig fisker.",
-  "Registrer aktivitet": "Registrer din miljøobservasjon eller deltakelse på en ryddeaktivitet.",
+  "Lagre melding": "Lagre informasjon om forsøpling, mangler eller skader lokalt i nettleseren.",
   "Bli med": "Gå til aktiviteten som gir fremgang i denne utfordringen.",
   "Ferdig": "Lukk valgene. Endringene lagres når du velger venner eller soner.",
   "Min side": "Se profilen din, eller logg inn og opprett konto.",
-  "Varsler": "Se varsler knyttet til profilen din.",
+  "Varsler": "Les viktig informasjon fra grunneiere om fiskeplassene.",
   "Finn min posisjon": "Sentrer kartet på deg. Den blå prikken følger posisjonen din.",
   "Lukk": "Lukk denne visningen.",
   "Les mer": "Utvid visningen for å lese om fiskeplassen og se bilder.",
@@ -121,16 +121,6 @@ toggle.addEventListener("click", () => {
   document.body.classList.toggle("help-mode", helpMode);
   if (helpMode) { toggle.dataset.help = "Trykk på en knapp for å lese hjelpen. Trykk på ? igjen for å bruke knappene som vanlig."; show(toggle); }
 });
-document.addEventListener("pointerover", event => { if (event.pointerType === "mouse") show(target(event)); });
-document.addEventListener("pointerout", event => {
-  if (event.pointerType === "mouse" && active && !active.contains(event.relatedTarget) && !tooltip.contains(event.relatedTarget)) hide();
-});
-document.addEventListener("focusin", event => show(target(event)));
-document.addEventListener("focusout", event => { if (!tooltip.contains(event.relatedTarget)) hide(); });
-document.addEventListener("pointerdown", event => {
-  const control = target(event);
-  if (helpMode && control && !toggle.contains(event.target)) show(control);
-}, true);
 document.addEventListener("click", event => {
   if (toggle.contains(event.target)) return;
   const control = target(event);

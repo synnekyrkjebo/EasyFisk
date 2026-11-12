@@ -1,6 +1,9 @@
+import {zoneSettings} from './landowner-store.js';
 const PREFIX = "easyfisk.demo.ticket.";
+function requireOpenPlace(booking){if(zoneSettings(booking.place.name).closed)throw new Error('Fiskeplassen er stengt for nye kortkjøp.');}
 
 export function createDemoTicket(booking, buyer, recipient, base) {
+  requireOpenPlace(booking);
   const token = crypto.randomUUID();
   const ticket = { demo: true, booking, buyerName: buyer.name, recipient,
     createdAt: new Date().toISOString() };
@@ -28,6 +31,7 @@ export function readDemoTicket(token) {
 const ORDER_PREFIX = "easyfisk.demo.order.";
 
 export function completeDemoOrder(booking, buyer, recipients, acceptedRules) {
+  requireOpenPlace(booking);
   if (!acceptedRules || !buyer?.email || recipients.length !== booking.people
     || recipients.some(person => !person.name?.trim() || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(person.email))
     || new Set(recipients.map(person => person.email.toLowerCase())).size !== recipients.length) {

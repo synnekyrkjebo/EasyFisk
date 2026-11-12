@@ -837,3 +837,6 @@ button:focus-visible, a:focus-visible {
 .active-session-banner[hidden] { display: none; }
 .active-session-banner:focus-visible { outline: 3px solid #53bd6b; outline-offset: 3px; }
 @media (prefers-reduced-motion: reduce) { .bottom-nav .has-active-session .report-button { animation: none; } }
+.notification-trigger { position: relative; }
+.notification-dot { position: absolute; top: 5px; right: 5px; width: 9px; height: 9px; border: 2px solid #07513d; border-radius: 50%; background: #f4b544; pointer-events: none; }
+.notification-dot[hidden] { display: none; }

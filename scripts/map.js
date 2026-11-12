@@ -1,3 +1,4 @@
+import {renderZoneInformation} from './shared/zone-information.js';
 const zoneCard = document.querySelector("#zone-card");
 const closeCard = document.querySelector(".close-card");
 const readMoreButton = document.querySelector("#read-more-button");
@@ -16,6 +17,7 @@ buyButton.addEventListener("click", () => {
 function renderOffers(place) {
   const offers = inaturOffers[place.name];
   zoneOffers.replaceChildren();
+  const ownerInfo=document.createElement('section');ownerInfo.className='owner-zone-information';zoneOffers.append(ownerInfo);renderZoneInformation(ownerInfo,place);
 
   offers.forEach((offer) => {
     const article = document.createElement("article");
@@ -178,7 +180,6 @@ const locateControl = L.control({ position: "topright" });
 locateControl.onAdd = () => {
   const button = L.DomUtil.create("button", "map-location-button");
   button.type = "button";
-  button.title = "Finn min posisjon";
   button.setAttribute("aria-label", "Finn min posisjon");
   button.innerHTML = '<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="7"/><circle cx="12" cy="12" r="2"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3"/></svg>';
   L.DomEvent.disableClickPropagation(button);

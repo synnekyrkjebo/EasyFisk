@@ -112,12 +112,31 @@ $("#start-form").addEventListener("submit", async event => {
   } catch (error) { $("#session-status").textContent = message(error); }
   finally { busy = false; updateStart(); }
 });
-$("#end-session").addEventListener("click", async () => {
+$("#end-session").addEventListener("click", () => {
+  if (busy || !current || current.end) return;
+  $("#end-session-status").textContent = "";
+  $("#end-session-dialog").showModal();
+});
+$("#cancel-end-session").addEventListener("click", () => $("#end-session-dialog").close());
+$("#register-before-end").addEventListener("click", () => {
+  $("#end-session-dialog").close();
+  openCatch();
+});
+$("#confirm-end-session").addEventListener("click", async () => {
   if (busy || !current || current.end) return;
   busy = true;
-  try { await saveSession(user, { ...current, end: new Date().toISOString() }); await refresh(); $("#session-status").textContent = "Økten er avsluttet. Du kan fortsatt legge til eller redigere fangst."; }
-  catch (error) { $("#session-status").textContent = message(error); }
-  finally { busy = false; updateStart(); }
+  $("#confirm-end-session").disabled = true;
+  $("#register-before-end").disabled = true;
+  $("#cancel-end-session").disabled = true;
+  try { await saveSession(user, { ...current, end: new Date().toISOString() }); await refresh(); $("#end-session-dialog").close(); $("#session-status").textContent = "Økten er avsluttet. Du kan fortsatt legge til eller redigere fangst."; }
+  catch (error) { $("#end-session-status").textContent = message(error); }
+  finally {
+    busy = false;
+    $("#confirm-end-session").disabled = false;
+    $("#register-before-end").disabled = false;
+    $("#cancel-end-session").disabled = false;
+    updateStart();
+  }
 });
 function lengthWarning() { $("#length-warning").hidden = Number($("#fish-length").value) <= 65; }
 $("#fish-length").addEventListener("input", lengthWarning);

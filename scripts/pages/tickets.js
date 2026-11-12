@@ -1,3 +1,4 @@
+import {renderZoneInformation} from '../shared/zone-information.js';
 import { readDemoTicket, listDemoTickets, readDemoOrder } from "../shared/demo-tickets.js";
 import { addDays } from "../shared/purchase-calendar.js";
 import { getCurrentUser } from "../shared/auth.js";
@@ -66,6 +67,9 @@ if (!token) {
 } else {
   document.querySelector("#ticket-content").hidden = false;
   const { booking, recipient } = ticket;
+
+  const ownerInfo=document.createElement('section');ownerInfo.className='selection-card owner-zone-information';
+  document.querySelector('.purchase-main').append(ownerInfo);renderZoneInformation(ownerInfo,booking.place,{days:booking.dates.length,people:booking.people});
   const name = booking.place.name === "Mandalselva Sone 3" ? "Mandalselva" : booking.place.name;
   document.querySelector("#ticket-place").textContent = `${booking.place.zone} – ${name}`;
   document.querySelector("#ticket-recipient").textContent = recipient.name;

@@ -1,5 +1,14 @@
 import { searchFriends } from "./recipients.js";
 
+const profilePictures = {
+  'kari@example.com': new URL('../../assets/profiles/kari-portrait.jpg', import.meta.url).href,
+  'per@example.com': new URL('../../assets/profiles/per-portrait.jpg', import.meta.url).href,
+  'anne@example.com': new URL('../../assets/profiles/anne-portrait.jpg', import.meta.url).href,
+};
+export function profilePictureUrl(profile) {
+  return profilePictures[profile.id] || null;
+}
+
 function database() {
   return new Promise((resolve, reject) => {
     const request = indexedDB.open("easyfisk.social", 1);
@@ -22,6 +31,15 @@ async function access(name, mode, operation) {
 export function defaultProfile(user) {
   return { id: user.email.toLowerCase(), name: user.name, bio: "", visibility: "private", avatar: null,
     following: searchFriends("").filter(friend => friend.email !== user.email.toLowerCase()).map(friend => friend.email), zones: [] };
+}
+export function exampleProfile(friend) {
+  const profile = defaultProfile(friend);
+  const bios = {
+    "kari@example.com": "Glad i laksefiske og rolige morgener langs elva.",
+    "per@example.com": "Utforsker fiskeplasser og deler gjerne erfaringer fra turene.",
+  };
+  if (bios[profile.id]) return { ...profile, visibility: "public", bio: bios[profile.id] };
+  return profile;
 }
 export async function getProfile(user) { return await access("profiles", "readonly", store => store.get(user.email.toLowerCase())) || defaultProfile(user); }
 export async function getProfiles() { return access("profiles", "readonly", store => store.getAll()); }

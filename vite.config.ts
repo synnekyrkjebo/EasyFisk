@@ -44,7 +44,7 @@ export default defineConfig(({ mode }) => ({
     },
     closeBundle() {
       mkdirSync("dist/scripts/data", { recursive: true });
-      for (const file of ["scripts/map.js", "scripts/data/inatur-offers.js", "scripts/data/fishing-places.js"]) {
+      for (const file of ["scripts/data/inatur-offers.js", "scripts/data/fishing-places.js"]) {
         cpSync(file, `dist/${file}`);
       }
       cpSync("assets/inatur", "dist/assets/inatur", { recursive: true });

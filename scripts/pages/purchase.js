@@ -1,3 +1,4 @@
+import {renderZoneInformation} from '../shared/zone-information.js';
 import { addDays, firstBookableDay, monthDays, exampleAvailability } from "../shared/purchase-calendar.js";
 import { readBooking, bookingUrl } from "../shared/booking.js";
 
@@ -45,6 +46,9 @@ if (searchMode) {
   continueButton.textContent = "Vis tilgjengelige soner";
 }
 if (chosenPlace) {
+  const ownerInfo=document.createElement('section');ownerInfo.className='selection-card owner-zone-information';
+  document.querySelector('.purchase-main').append(ownerInfo);renderZoneInformation(ownerInfo,chosenPlace,{});
+
   placeSelect.value = chosenPlace.name;
   document.querySelector("#place-picker").hidden = true;
   const heading = document.querySelector("#chosen-place");

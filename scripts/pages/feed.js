@@ -4,7 +4,7 @@ import {getProfile,getProfiles,saveProfile,getReactions,toggleReaction,addCommen
 import {listSharedSessions} from '../shared/fishing-sessions.js';
 import {activityPosts,visiblePosts,zoneOverview,initialPosts,prettyTime} from '../shared/community.js';
 import {searchFriends} from '../shared/recipients.js';
-import {el,photo,revokePhotos,number} from '../shared/community-ui.js';
+import {el,photo,profileAvatar,revokePhotos,number} from '../shared/community-ui.js';
 const $=s=>document.querySelector(s);
 let user,profile,posts=[],profiles=[],type='friends',followBusy=false,renderVersion=0;
 for(const [id,page] of [['#feed-login','logginn.html'],['#feed-signup','registrer.html']]){const url=new URL(page,location.href);url.searchParams.set('tilbake',location.pathname);$(id).href=url.href;}
@@ -25,7 +25,7 @@ async function render(){
   const card=el('article','','feed-post');const header=el('div','','post-header');
   const authorProfile=profiles.find(p=>p.id===post.author.email);const name=authorProfile?.name||post.author.name;
   const author=el('a',name,'post-author');const authorUrl=new URL('minside.html',location.href);authorUrl.searchParams.set('bruker',post.author.email);author.href=authorUrl.href;
-  const avatar=authorProfile?.avatar?photo(authorProfile.avatar,`Profilbilde av ${name}`,'avatar avatar-small'):el('span',name.slice(0,1),'avatar avatar-small');
+  const avatar=profileAvatar(authorProfile||{id:post.author.email,name});
   header.append(avatar,author,el('span',post.kind==='session'?'Fiskeøkt':'Fangst','post-kind'));card.append(header);
   if(post.photo)card.append(photo(post.photo,`${post.species}, ${post.length} cm`));
   else if(post.imageUrl){

@@ -1,3 +1,4 @@
+import {renderZoneInformation} from '../shared/zone-information.js';
 import { recordActivity } from "../shared/social-store.js";
 import { readBooking, bookingUrl } from "../shared/booking.js";
 import { addDays } from "../shared/purchase-calendar.js";
@@ -18,6 +19,9 @@ if (!booking) {
   const returnUrl = bookingUrl("kjop.html", booking, window.location.href).href;
   document.querySelector("#back-to-calendar").href = returnUrl;
   document.querySelector("#edit-dates").href = returnUrl;
+
+  const ownerInfo=document.createElement('section');ownerInfo.className='selection-card owner-zone-information';
+  document.querySelector('.purchase-main').append(ownerInfo);renderZoneInformation(ownerInfo,booking.place,{days:booking.dates.length,people:booking.people});
   const name = booking.place.name === "Mandalselva Sone 3" ? "Mandalselva" : booking.place.name;
   document.querySelector("#booking-place").textContent = `${booking.place.zone} – ${name}`;
   document.querySelector("#booking-type").textContent = booking.type === "group"

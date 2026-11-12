@@ -54,7 +54,7 @@ export function achievements(sessions, activity, now = new Date()) {
     ["Artsutforsker", "Registrer tre forskjellige arter", Object.keys(stats.species).length, 3, "🐠"],
     ["Nøyaktig rapportør", "Fyll ut alle feltene, GPS og bilde i ti fangstrapporter", fish.filter(completeCatch).length, 10, "📝"],
     ["Ansvarlig fisker", "Les og bekreft oppdaterte fiskeregler", activity.filter(a => a.kind === "rules").length, 1, "📖"],
-    ["Miljøvenn", "Registrer forsøpling eller et miljøproblem", activity.filter(a => a.kind === "environment").length, 1, "🌱"],
+    ["Miljøvenn", "Meld fra om forsøpling, mangler eller skader", activity.filter(a => a.kind === "environment").length, 1, "🌱"],
     ["Sesongstarter", "Registrer en økt 1.–7. juni", sessions.filter(s => day(s.start).slice(5) >= "06-01" && day(s.start).slice(5) <= "06-07").length, 1, "☀️"],
     ["Personlig rekord", "Slå din tidligere lengderekord for en art", stats.recordBeats, 1, "🏆"],
     ["Rask rapportering", "Registrer en fangst innen ti minutter", fish.filter(f => f.createdAt && new Date(f.createdAt) >= new Date(f.time) && new Date(f.createdAt) - new Date(f.time) <= 600000).length, 1, "⏱️"],
@@ -72,7 +72,7 @@ export function challenges(sessions, activity, now = new Date()) {
     ["Komplette fangster", "Registrer tre fangster med alle felt, GPS og bilde denne måneden", sessions.flatMap(s => s.catches).filter(f => month(f.time) === key && completeCatch(f)).length, 3, "loggfor.html"],
     ["Hver tur teller", "Registrer en avsluttet økt uten fangst denne måneden", current.filter(s => s.end && !s.catches.length).length, 1, "loggfor.html"],
     ["Oppdatert fisker", "Les og bekreft årets fiskeregler", activity.filter(a => a.kind === "rules" && a.version.startsWith(String(now.getFullYear()))).length, 1, "minside.html#profile-rules"],
-    ["En renere elv", "Delta på en ryddeaktivitet langs elven denne måneden", activity.filter(a => a.kind === "cleanup" && month(a.time) === key).length, 1, "minside.html#profile-environment"],
+    ["En renere elv", "Meld fra om et problem langs elven denne måneden", activity.filter(a => a.kind === "environment" && month(a.time) === key).length, 1, "minside.html#profile-environment"],
   ];
   return entries.map(([name, requirement, value, goal, href]) => ({name,requirement,value,goal,href,completed:value>=goal}));
 }
@@ -114,7 +114,7 @@ export function achievementDetails(name, sessions, activity, now = new Date()) {
     case 'Komplette fangster': return fishRows(f => month(f.time) === key && completeCatch(f));
     case 'Hver tur teller': return current.filter(s => s.end && !s.catches.length).map(sessionRow);
     case 'Oppdatert fisker': return activityRows(a => a.kind === 'rules' && a.version?.startsWith(String(now.getFullYear())));
-    case 'En renere elv': return activityRows(a => a.kind === 'cleanup' && month(a.time) === key);
+    case 'En renere elv': return activityRows(a => a.kind === 'environment' && month(a.time) === key);
     case 'Første kast': case 'Trofast fisker': return sessions.map(sessionRow);
     default: return [];
   }

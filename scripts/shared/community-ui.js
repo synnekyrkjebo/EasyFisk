@@ -1,9 +1,16 @@
 import {ZONE_FEED_ENABLED} from "./features.js";
+import {profilePictureUrl} from './social-store.js';
 import { calculateStatistics, achievements, challenges, achievementDetails } from "./statistics.js";
 import { monthLabel, prettyTime } from "./community.js";
 export const el = (tag, text = "", className = "") => { const node = document.createElement(tag); node.textContent = text; if(className)node.className=className; return node; };
 export const number = (value, decimals = 1) => new Intl.NumberFormat("nb-NO", {maximumFractionDigits:decimals}).format(value);
 export const imageUrls = [];
+export function profileAvatar(profile, className='avatar avatar-small') {
+ if(profile.avatar)return photo(profile.avatar,`Profilbilde av ${profile.name}`,className);
+ const url=profilePictureUrl(profile);
+ if(!url){const initial=el('span',profile.name.slice(0,1),className);initial.setAttribute('aria-label',profile.name);return initial;}
+ const image=el('img','',className);image.src=url;image.alt=`Profilbilde av ${profile.name}`;image.decoding='async';return image;
+}
 export function photo(blob, alt, className = "community-photo") { const img=el("img","",className);img.src=URL.createObjectURL(blob);img.alt=alt;imageUrls.push(img.src);return img; }
 export function revokePhotos() { imageUrls.splice(0).forEach(url=>URL.revokeObjectURL(url)); }
 window.addEventListener("pagehide", revokePhotos);
@@ -64,8 +71,11 @@ export function renderChallenges(container,sessions,activity){
   if(!challenge.completed){const link=el("a","Bli med","account-button");link.href=challenge.href;card.append(link);}container.append(card);
  }
 }
-export function renderGallery(container,sessions){
- container.replaceChildren();const catches=sessions.flatMap(s=>s.catches).filter(f=>f.photo&&(f.share?.friends||(ZONE_FEED_ENABLED&&f.share?.zone)));
- if(!catches.length)container.append(el("p","Bilder av fangster du deler, vises her.","account-status"));
- for(const fish of catches){const figure=el("figure");figure.append(photo(fish.photo,`${fish.species}, ${fish.length} cm`),el("figcaption",`${fish.species} · ${fish.length} cm · ${prettyTime(fish.time)}`));container.append(figure);}
+export function renderGallery(container,sessions,{includePrivate=false}={}){
+ container.replaceChildren();const catches=sessions.flatMap(s=>s.catches).filter(f=>(f.photo||f.imageUrl)&&(includePrivate||f.share?.friends||(ZONE_FEED_ENABLED&&f.share?.zone)));
+ if(!catches.length)container.append(el("p",includePrivate?"Fangstbildene dine vises her, også når du ikke deler dem.":"Ingen delte fangstbilder ennå.","account-status"));
+ for(const fish of catches){const figure=el("figure");let image;
+  if(fish.photo)image=photo(fish.photo,`${fish.species}, ${fish.length} cm`);
+  else{image=el('img','','community-photo');image.src=fish.imageUrl;image.alt=`${fish.species}, ${fish.length} cm`;image.loading='lazy';}
+  figure.append(image,el("figcaption",`${fish.species} · ${fish.length} cm · ${prettyTime(fish.time)}`));container.append(figure);}
 }

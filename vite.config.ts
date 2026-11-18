@@ -12,6 +12,8 @@ const pages = {
   sessions: "loggfor.html",
   feed: "feed.html",
   statistics: "statistikk.html",
+  landowner: "grunneier.html",
+  landownerLogin: "grunneier-logginn.html",
 };
 
 export default defineConfig(({ mode }) => ({

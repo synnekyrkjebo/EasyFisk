@@ -56,6 +56,8 @@ getCurrentUser().then(async account=>{
  user=account;const requested=new URLSearchParams(location.search).get('bruker');own=!requested||requested===user?.email?.toLowerCase();
  $('#profile-back').hidden=own;
  $('#profile-heading').hidden=!own;
+ $('#owner-dashboard-link').hidden=!own||user?.role!=='landowner';
+ $('#account-role').textContent=own?(user?.role==='landowner'?'Grunneier':'Fisker'):'';
  $('#profile-guest').hidden=Boolean(user)||!own;$('#profile-account').hidden=!user&&own;if(!user&&own)return;
  if(own){
   [profile,sessions,activity]=await Promise.all([getProfile(user),listSessions(user),listActivity(user)]);

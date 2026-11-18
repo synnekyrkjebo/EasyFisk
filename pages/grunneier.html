@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="nb">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#07513d">
+  <title>Grunneierportal – EasyFisk</title>
+  <link rel="stylesheet" href="../styles/main.css?v=20261112-1">
+  <link rel="stylesheet" href="../styles/purchase.css?v=20261001-29">
+  <link rel="stylesheet" href="../styles/community.css?v=20261112-4">
+  <link rel="stylesheet" href="../styles/landowner-dashboard.css?v=20261112-7">
+</head>
+<body class="owner-dashboard-page">
+  <section class="dashboard-access" id="dashboard-access" aria-labelledby="access-heading">
+    <h1 id="access-heading">EasyFisk Grunneierportal</h1>
+    <p id="access-message" role="status">Sjekker tilgang …</p>
+    <a class="continue-button" href="grunneier-logginn.html">Logg inn som grunneier</a>
+    <a class="account-button" href="index.html">Åpne EasyFisk-appen ↗</a>
+  </section>
+  <div class="owner-dashboard" id="landowner-panel" hidden>
+    <aside class="dashboard-sidebar">
+      <a class="dashboard-brand" href="#kalender">EasyFisk<span>Grunneierportal</span></a>
+      <p class="dashboard-estate" id="owner-estate"></p>
+      <nav aria-label="Grunneiermeny">
+        <a href="#kalender" data-dashboard-nav="kalender">Bestillingskalender</a>
+        <a href="#soner" data-dashboard-nav="soner">Fiskekort</a>
+        <a href="#varsler" data-dashboard-nav="varsler">Varsler</a>
+      </nav>
+      <div class="dashboard-sidebar-footer"><a href="index.html" target="_blank" rel="noopener">Forhåndsvis i appen ↗</a><a href="grunneier-logginn.html?bytt=1">Bytt grunneierkonto</a><button id="owner-logout" type="button">Logg ut</button></div>
+    </aside>
+    <main class="dashboard-main">
+      <header class="dashboard-topbar"><span>EasyFisk Grunneierportal</span><span class="dashboard-badge" id="owner-account-badge"></span></header>
+      <section data-dashboard-view="kalender" hidden aria-labelledby="calendar-heading">
+        <div class="dashboard-page-heading"><p class="dashboard-eyebrow">Bestillinger</p><h1 id="calendar-heading" tabindex="-1">Bestillingskalender</h1><p>Velg et fiskedøgn for å se fiskerne og sende dem en melding.</p></div>
+        <p class="dashboard-eyebrow" data-owner-place></p>
+        <div class="owner-calendar-layout">
+          <section class="dashboard-card" aria-label="Kalender over bestilte fiskekort">
+            <div class="owner-calendar-toolbar"><button class="account-button" id="booking-calendar-previous" type="button" aria-label="Forrige måned">←</button><h2 id="booking-calendar-month" aria-live="polite"></h2><button class="account-button" id="booking-calendar-next" type="button" aria-label="Neste måned">→</button></div>
+            <div class="owner-calendar-weekdays" aria-hidden="true"><span>Man</span><span>Tir</span><span>Ons</span><span>Tor</span><span>Fre</span><span>Lør</span><span>Søn</span></div>
+            <div class="owner-calendar-days" id="booking-calendar-days"></div>
+            <p class="account-status">Antallet viser bestilte kort. Fiskedøgnet starter kl. 18.00 på valgt dato og slutter kl. 17.59 neste dag.</p>
+          </section>
+          <section class="dashboard-card owner-booking-detail" aria-labelledby="booking-day-heading">
+            <h2 id="booking-day-heading"></h2><p class="account-status" id="booking-day-summary" role="status"></p>
+            <div class="owner-day-sales"><button class="account-button" id="booking-toggle-sales" type="button">Steng kortsalget denne dagen</button><p class="account-status" id="booking-sales-help">Eksisterende bestillinger beholdes når du stenger for nye kjøp.</p><p class="account-status" id="booking-sales-status" role="status"></p></div>
+            <button class="continue-button" id="booking-message-all" type="button" disabled>Send melding til alle denne dagen</button>
+            <div id="booking-day-list"></div>
+          </section>
+        </div>
+        <p class="account-status" id="booking-calendar-status" role="status"></p>
+      </section>
+      <section data-dashboard-view="soner" hidden aria-labelledby="zones-heading">
+        <div class="dashboard-page-heading"><p class="dashboard-eyebrow" id="owner-card-label"></p><h1 id="zones-heading" tabindex="-1">Fiskekort</h1><p>Oppdater informasjon, priser og tilgjengelighet for dine fiskeplasser.</p></div>
+        <section class="dashboard-card">
+          <p class="dashboard-eyebrow" data-owner-place></p>
+                  <form id="owner-settings">
+          <div class="owner-form-field"><label class="checkout-label" for="owner-description">Om fiskeplassen</label><textarea class="checkout-input" id="owner-description" rows="4" maxlength="2000"></textarea></div>
+          <div class="owner-form-field"><label class="checkout-label" for="owner-cardTitle">Navn på fiskekort</label><input class="checkout-input" id="owner-cardTitle" maxlength="120" required></div>
+          <div class="owner-form-field"><label class="checkout-label" for="owner-cardInfo">Informasjon om fiskekortet</label><textarea class="checkout-input" id="owner-cardInfo" rows="3" maxlength="2000"></textarea></div>
+          <div class="owner-form-field"><label class="checkout-label" for="owner-price">Pris per person per fiskedøgn (kr)</label><input class="checkout-input" id="owner-price" type="number" min="0" step="0.01"></div>
+          <div class="owner-form-field"><label class="checkout-label" for="owner-capacity">Antall kort per fiskedøgn</label><input class="checkout-input" id="owner-capacity" type="number" min="1" max="100" required></div>
+          <div class="owner-form-field"><label class="checkout-label" for="owner-rules">Lokale fiskeregler og praktisk informasjon</label><textarea class="checkout-input" id="owner-rules" rows="4" maxlength="2000"></textarea></div>
+          <fieldset class="owner-photo-editor"><legend>Bilder av fiskeplassen</legend><p class="account-status">Legg til bilder eller fjern eksisterende. Endringene publiseres når du lagrer fiskekortet.</p><div class="owner-photo-grid" id="owner-photo-grid"></div><label class="checkout-label" for="owner-photo-upload">Legg til bilder</label><input class="checkout-input" id="owner-photo-upload" type="file" accept="image/jpeg,image/png,image/webp" multiple><p class="account-status">Maks åtte bilder. JPG, PNG eller WebP, opptil 10 MB per bilde.</p><p class="account-status" id="owner-photo-status" role="status"></p></fieldset>
+          <label class="recipient-option"><input type="checkbox" id="owner-closed"> Steng for nye kortkjøp</label>
+          <button class="continue-button" type="submit">Lagre sone og fiskekort</button><p class="account-status" id="owner-save-status" role="status"></p>
+        </form>
+
+        </section>
+      </section>
+      <section data-dashboard-view="varsler" hidden aria-labelledby="notices-heading">
+        <div class="dashboard-page-heading"><p class="dashboard-eyebrow">Informasjon til fiskerne</p><h1 id="notices-heading" tabindex="-1">Varsler</h1><p>Publiser viktige meldinger om fiskestans, regler eller andre endringer.</p></div>
+        <div class="dashboard-notice-grid">
+          <section class="dashboard-card"><h2>Nytt varsel</h2><p class="account-status" data-owner-place></p>        <form id="owner-notice-form">
+          <label class="checkout-label" for="owner-notice-title">Overskrift</label><input class="checkout-input" id="owner-notice-title" maxlength="120" required>
+          <label class="checkout-label" for="owner-notice-text">Melding</label><textarea class="checkout-input" id="owner-notice-text" rows="4" maxlength="2000" required></textarea>
+          <button class="continue-button" type="submit">Publiser varsel</button><p class="account-status" id="owner-notice-status" role="status"></p>
+        </form>
+</section>
+          <section class="dashboard-card"><h2>Publiserte varsler</h2><div id="owner-published"></div></section>
+        </div>
+      </section>
+      <p class="account-status" id="dashboard-status" role="status"></p>
+    </main>
+  </div>
+  <dialog class="message-dialog booking-message-dialog" id="booking-message-dialog" aria-labelledby="booking-message-heading">
+    <form id="booking-message-form">
+      <h2 id="booking-message-heading">Send melding</h2>
+      <p class="account-status" id="booking-message-recipients"></p>
+      <p class="account-status">Meldingen vises i mottakernes varslingsbjelle i EasyFisk.</p>
+      <label class="checkout-label" for="booking-message-title">Overskrift</label><input class="checkout-input" id="booking-message-title" maxlength="120" required>
+      <label class="checkout-label" for="booking-message-text">Melding</label><textarea class="checkout-input" id="booking-message-text" rows="5" maxlength="2000" required></textarea>
+      <p class="account-status" id="booking-message-status" role="status"></p>
+      <button class="continue-button" id="booking-message-send" type="submit">Send melding</button><button class="account-button dialog-cancel" id="booking-message-cancel" type="button">Avbryt</button>
+    </form>
+  </dialog>
+  <script type="module" src="../scripts/pages/landowner-dashboard.js?v=20261112-9"></script>
+</body>
+</html>

@@ -1,4 +1,4 @@
-import {zoneSettings} from './landowner-store.js';
+import {zoneSettings,isSalesClosed} from './landowner-store.js';
 // Kalenderdatoer beregnes uavhengig av nettleserens tidssone og sommertid.
 export function dateKey(date) {
   return date.toISOString().slice(0, 10);
@@ -31,7 +31,7 @@ export function exampleAvailability(place, key) {
   let hash = 0;
   for (const character of `${place}:${key}`) hash = (hash * 31 + character.codePointAt(0)) >>> 0;
   const settings=zoneSettings(place);
-  const total = settings.closed?0:(settings.capacity??4);
+  const total = isSalesClosed(place,key)?0:(settings.capacity??4);
   const booked = hash % (total + 1);
   return { total, booked, remaining: total - booked };
 }

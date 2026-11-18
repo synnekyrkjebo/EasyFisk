@@ -1,11 +1,16 @@
-import {zoneSettings} from './landowner-store.js';
+import {zoneDetails} from './zone-details.js';
 export function renderZoneInformation(container,place,{days=1,people=1}={}){
- const settings=zoneSettings(place.name);
+ const settings=zoneDetails(place.name);
  container.replaceChildren();
  if(!Object.keys(settings).length){container.hidden=true;return;}
  container.hidden=false;
  const add=(tag,text)=>{if(!text)return;const node=document.createElement(tag);node.textContent=text;container.append(node);};
  add('h3',settings.cardTitle);add('p',settings.description);add('p',settings.cardInfo);add('p',settings.rules);
+ if(settings.images?.length){
+  const gallery=document.createElement('div');gallery.className='zone-gallery';
+  for(const photo of settings.images){const figure=document.createElement('figure'),image=document.createElement('img');image.src=photo.src;image.alt=photo.alt;image.loading='lazy';figure.append(image);gallery.append(figure);}
+  container.append(gallery);
+ }
  if(settings.price!==null&&settings.price!==undefined){
   const currency=value=>new Intl.NumberFormat('nb-NO',{style:'currency',currency:'NOK'}).format(value);
   add('p',`${currency(settings.price)} per person per fiskedøgn`);

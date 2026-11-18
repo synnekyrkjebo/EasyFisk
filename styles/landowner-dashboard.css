@@ -1,0 +1,195 @@
+.owner-dashboard-page { display: block; background: #f4f7f3; }
+.owner-dashboard { width: 100%; min-height: 100dvh; display: grid; grid-template-columns: 240px minmax(0, 1fr); }
+.dashboard-sidebar { position: sticky; top: 0; height: 100dvh; display: flex; flex-direction: column; padding: 32px 20px; color: #fff; background: #07513d; }
+.dashboard-brand { display: grid; gap: 5px; padding: 0 12px; color: #fff; font-size: 28px; font-weight: 750; text-decoration: none; }
+.dashboard-brand span { font-size: 12px; font-weight: 450; color: #bcd9cb; letter-spacing: .04em; }
+.dashboard-estate { margin: 44px 12px 16px; font-size: 12px; color: #bcd9cb; }
+.dashboard-sidebar nav { display: grid; gap: 8px; }
+.dashboard-sidebar nav a { padding: 14px 12px; border-radius: 10px; font-size: 14px; font-weight: 550; color: #d9e9e0; text-decoration: none; }
+.dashboard-sidebar nav a:hover { background: #ffffff12; }
+.dashboard-sidebar nav a[aria-current] { color: #07513d; background: #eaf3ec; font-weight: 700; }
+.dashboard-sidebar-footer { display: grid; gap: 6px; margin-top: auto; padding-top: 36px; }
+.dashboard-sidebar-footer a, .dashboard-sidebar-footer button { display: block; padding: 12px; border: 0; color: #d9e9e0; background: transparent; font: inherit; font-size: 13px; text-decoration: none; text-align: left; cursor: pointer; }
+.dashboard-main { width: 100%; margin: 0; padding: 0 clamp(24px, 2.5vw, 56px) 48px; min-width: 0; }
+.dashboard-topbar { display: flex; align-items: center; justify-content: space-between; gap: 16px; min-height: 80px; border-bottom: 1px solid #dfe7df; color: #527066; font-size: 13px; }
+.dashboard-topbar a, .dashboard-section-heading a, .dashboard-edit { color: #07513d; text-decoration: none; font-size: 13px; font-weight: 650; }
+.dashboard-topbar a:hover, .dashboard-section-heading a:hover, .dashboard-edit:hover { text-decoration: underline; }
+.dashboard-page-heading { margin: 36px 0 28px; }
+.dashboard-eyebrow { margin: 0 0 8px; color: #527066; font-size: 12px; font-weight: 600; }
+.dashboard-page-heading h1 { margin: 0 0 12px; color: #07513d; font-size: clamp(26px, 3vw, 36px); letter-spacing: -.025em; }
+.dashboard-page-heading > p:last-child { margin: 0; color: #527066; font-size: 14px; line-height: 1.6; }
+.dashboard-metrics { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px; margin-bottom: 36px; }
+.dashboard-metric { display: grid; gap: 10px; padding: 24px 20px; border: 1px solid #dfe7df; border-radius: 16px; background: #fff; }
+.dashboard-metric strong { color: #07513d; font-size: 32px; font-variant-numeric: tabular-nums; }
+.dashboard-metric span { color: #527066; font-size: 12px; line-height: 1.5; }
+.dashboard-section-heading { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 12px; margin-bottom: 18px; }
+.dashboard-section-heading h2 { margin: 0; color: #07513d; font-size: 19px; }
+.dashboard-zone-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px; }
+.dashboard-card { min-width: 0; padding: 28px; border: 1px solid #dfe7df; border-radius: 16px; background: #fff; }
+.dashboard-card > h2 { margin: 0 0 20px; color: #07513d; font-size: 19px; }
+.dashboard-zone h3 { margin: 18px 0 8px; color: #07513d; font-size: 20px; }
+.dashboard-zone > p { margin: 8px 0; font-size: 13px; line-height: 1.6; }
+.dashboard-zone .dashboard-edit { display: inline-block; margin-top: 20px; padding: 8px 0; }
+.dashboard-badge { display: inline-flex; padding: 5px 10px; border-radius: 20px; color: #176b43; background: #eaf3ec; font-size: 11px; font-weight: 650; }
+.dashboard-badge.is-closed { color: #8a4427; background: #fff0e5; }
+.dashboard-recent { margin-top: 28px; }
+.dashboard-notice-grid { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr); align-items: start; gap: 24px; }
+.dashboard-notice { padding: 20px 0; border-top: 1px solid #e2e7e4; }
+.dashboard-notice h3 { margin: 8px 0; color: #07513d; font-size: 16px; }
+.dashboard-notice > p:not(.dashboard-eyebrow) { margin: 0 0 12px; font-size: 13px; line-height: 1.7; white-space: pre-wrap; overflow-wrap: anywhere; }
+.dashboard-notice time { color: #527066; font-size: 11px; }
+.dashboard-card > .checkout-label:first-child { margin-top: 0; }
+#landowner-panel.owner-dashboard { padding: 0; }
+#landowner-panel .dashboard-card .continue-button { max-width: 360px; }
+#owner-notice-form { margin-top: 24px; }
+.dashboard-access { width: min(100% - 32px, 460px); margin: 12vh auto; padding: 28px; border-radius: 16px; border: 1px solid #dfe7df; background: #fff; }
+.dashboard-access h1 { margin-top: 0; color: #07513d; }
+.dashboard-access p { line-height: 1.6; }
+.dashboard-access .account-button { margin-top: 16px; }
+.dashboard-sidebar a:focus-visible, .dashboard-sidebar button:focus-visible { outline: 2px solid #fff; outline-offset: 2px; }
+/* The public entrance to the landowner portal. */
+.portal-login { display: grid; grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr); min-height: 100dvh; background: #f5f7f2; }
+.portal-introduction { display: flex; flex-direction: column; gap: 36px; padding: clamp(28px, 3.5vw, 64px); background: #064d3a; color: #fff; }
+.portal-brand-row { display: flex; align-items: center; justify-content: space-between; gap: 20px; }
+.portal-introduction .portal-brand { display: flex; align-items: center; gap: 10px; padding: 0; font-size: 25px; letter-spacing: -.04em; }
+.portal-brand > span { color: #fff; font-size: 25px; font-weight: 750; letter-spacing: -.04em; }
+.portal-brand svg { width: 42px; height: 42px; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+.portal-role-tag { padding: 7px 12px; border: 1px solid #ffffff30; border-radius: 24px; color: #d3e6d9; font-size: 11px; white-space: nowrap; }
+.portal-introduction-content { margin: auto 0 0; padding-top: 24px; }
+.portal-introduction .dashboard-eyebrow { margin-bottom: 18px; color: #b8d4bd; font-size: 11px; letter-spacing: .1em; text-transform: uppercase; }
+.portal-introduction h1 { margin: 0 0 24px; font-size: clamp(36px, 3.6vw, 68px); font-weight: 600; line-height: 1.1; letter-spacing: -.045em; }
+.portal-introduction h1 > span { color: #c9ddb9; }
+.portal-introduction-content > p:not(.dashboard-eyebrow) { max-width: 470px; margin: 0; color: #c4d8cc; line-height: 1.8; font-size: 14px; }
+.portal-features { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 24px; }
+.portal-features > span { padding: 8px 11px; border-radius: 7px; color: #d6e6da; background: #ffffff0c; font-size: 10px; }
+.portal-river-photo { position: relative; overflow: hidden; min-height: 160px; max-height: 280px; margin: 0; border-radius: 16px; }
+.portal-river-photo img { display: block; width: 100%; height: clamp(180px, 24vh, 280px); object-fit: cover; object-position: center 65%; }
+.portal-river-photo::after { content: ''; position: absolute; inset: 0; background: linear-gradient(transparent 40%, #032b22c9); pointer-events: none; }
+.portal-river-photo figcaption { position: absolute; z-index: 1; inset: auto 20px 18px; display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px; color: #e9f2e8; font-size: 11px; }
+.portal-river-photo figcaption > span:first-child { font-weight: 650; }
+.portal-app-link { display: flex; align-items: center; justify-content: space-between; align-self: stretch; padding: 4px 0; color: #c4d8cc; text-decoration: none; font-size: 12px; }
+.portal-app-link > span { font-size: 19px; }
+.portal-login-content { display: grid; align-items: center; justify-items: center; padding: clamp(32px, 5vw, 80px); background: radial-gradient(ellipse at top right, #eaf0e2, transparent 65%); }
+.portal-login-wrapper { width: min(100%, 470px); }
+.portal-section-label { margin: 0 0 24px; color: #748273; font-size: 11px; letter-spacing: .025em; }
+.portal-login-form { width: 100%; padding: clamp(24px, 3vw, 42px); border: 1px solid #e0e7da; border-radius: 22px; background: #fff; box-shadow: 0 16px 48px #16382208; }
+.portal-login-icon { display: grid; place-items: center; width: 48px; height: 48px; margin-bottom: 26px; border: 1px solid #dce7d8; border-radius: 14px; color: #07513d; background: #edf3e9; }
+.portal-login-icon svg, .portal-account-symbol svg { width: 23px; height: 23px; fill: none; stroke: currentColor; stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }
+.portal-login-form h2 { margin: 0 0 12px; color: #123c2e; font-size: clamp(24px, 2.2vw, 32px); font-weight: 650; letter-spacing: -.035em; }
+.portal-login-form > p:not(.dashboard-eyebrow) { margin: 0; color: #6b7a6c; font-size: 13px; line-height: 1.7; }
+.portal-login-form .checkout-label { margin: 30px 0 10px; color: #304d3c; font-size: 12px; font-weight: 600; }
+.portal-login-form select.checkout-input { min-height: 50px; padding: 12px 14px; border-color: #d6e1d2; border-radius: 10px; background: #fbfcf9; color: #163b2b; font-size: 14px; }
+.portal-account { display: flex; align-items: center; gap: 14px; margin: 18px 0 26px; padding: 18px 16px; border: 1px solid #e2e9db; border-radius: 12px; background: #f6f8f2; }
+.portal-account-symbol { display: grid; place-items: center; flex-shrink: 0; width: 42px; height: 42px; border-radius: 10px; background: #e4eddc; color: #416644; }
+.portal-account-details { min-width: 0; }
+.portal-account-label { color: #7b8872; font-size: 10px; }
+.portal-account h3 { margin: 5px 0 6px; color: #163b2b; font-size: 16px; font-weight: 650; }
+.portal-account p { margin: 0; color: #6b7a6c; font-size: 11px; overflow-wrap: anywhere; }
+.portal-login-form .continue-button { min-height: 52px; margin: 0; border-radius: 11px; box-shadow: 0 4px 12px #07513d12; font-size: 13px; transition: background 150ms ease; }
+.portal-login-form .continue-button:hover { background: #096348; }
+.portal-login-form > .portal-access-note { margin-top: 18px !important; color: #85907f !important; font-size: 11px !important; text-align: center; }
+.portal-login-form #owner-login-status:empty { display: none; }
+.portal-login-form #owner-login-status:not(:empty) { margin-top: 16px; color: #8a4427; }
+.portal-login-footer { display: flex; align-items: center; flex-wrap: wrap; justify-content: center; gap: 8px; margin-top: 26px; font-size: 12px; }
+.portal-login-footer > span { color: #7c8979; }
+.portal-fisher-link { color: #07513d; font-size: 12px; font-weight: 600; text-decoration: none; }
+.portal-fisher-link:hover, .portal-app-link:hover { text-decoration: underline; }
+.portal-introduction a:focus-visible { outline: 2px solid #d6e6bf; outline-offset: 4px; }
+.dashboard-page-heading h1:focus:not(:focus-visible) { outline: none; }
+.dashboard-page-heading h1:focus-visible { outline: 2px solid #176b43; outline-offset: 6px; border-radius: 4px; }
+.owner-calendar-filter { max-width: 400px; margin-bottom: 24px; }
+.owner-calendar-layout { display: grid; grid-template-columns: minmax(0, 1fr) minmax(320px, 420px); align-items: start; gap: 24px; }
+.owner-calendar-toolbar { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 24px; }
+.owner-calendar-toolbar h2 { margin: 0; color: #07513d; font-size: 18px; text-transform: capitalize; }
+.owner-calendar-toolbar .account-button { margin: 0; min-width: 40px; min-height: 40px; }
+.owner-calendar-weekdays, .owner-calendar-days { display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); gap: 6px; }
+.owner-calendar-weekdays { margin-bottom: 12px; color: #527066; font-size: 11px; text-align: center; }
+.owner-calendar-day { display: grid; justify-items: center; gap: 8px; padding: 12px 2px; border: 1px solid #e2e7e4; border-radius: 10px; background: #fff; color: #07513d; cursor: pointer; font: inherit; min-width: 0; }
+.owner-calendar-day strong { font-size: 14px; font-variant-numeric: tabular-nums; }
+.owner-calendar-day span { font-size: 9px; color: #527066; }
+.owner-calendar-day.has-bookings { background: #eaf3ec; border-color: #b9d5c2; }
+.owner-calendar-day[aria-current="date"] strong { text-decoration: underline; text-underline-offset: 4px; }
+.owner-calendar-day:hover { background: #dcebe0; }
+.owner-calendar-day[aria-pressed="true"] { background: #07513d; border-color: #07513d; color: #fff; }
+.owner-calendar-day[aria-pressed="true"] span { color: #d9e9e0; }
+.owner-calendar-day:focus-visible { outline: 2px solid #176b43; outline-offset: 2px; }
+.owner-calendar-day.is-sales-closed { border-style: dashed; border-color: #b57853; }
+.owner-calendar-day.is-sales-closed:not([aria-pressed="true"]) { background: #fff2e8; color: #8a4427; }
+.owner-calendar-day.is-sales-closed:not([aria-pressed="true"]) span { color: #8a4427; }
+.owner-day-sales { margin: 20px 0; padding: 16px; border: 1px solid #dfe7df; border-radius: 12px; background: #f4f7f3; }
+.owner-day-sales .account-button { margin: 0; width: 100%; }
+.owner-day-sales p { margin: 12px 0 0; }
+.owner-day-sales [role="status"]:empty { display: none; }
+.owner-photo-editor { margin: 28px 0 24px; padding: 20px; min-width: 0; border: 1px solid #dfe7df; border-radius: 12px; }
+.owner-photo-editor legend { padding: 0 8px; color: #07513d; font-size: 15px; font-weight: 650; }
+.owner-photo-editor > .account-status { font-size: 12px; line-height: 1.6; }
+.owner-photo-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 200px), 1fr)); gap: 20px; margin: 20px 0; }
+.owner-photo-grid figure { margin: 0; min-width: 0; }
+.owner-photo-grid img { display: block; width: 100%; aspect-ratio: 4 / 3; object-fit: cover; border-radius: 10px; }
+.owner-photo-grid .checkout-label { margin: 12px 0 8px; }
+.owner-photo-grid .account-button { margin-top: 12px; }
+.owner-photo-editor [role="status"]:empty { display: none; }
+.owner-calendar-layout .account-status { font-size: 12px; line-height: 1.6; }
+.owner-booking-detail > h2 { font-size: 18px; }
+.owner-booking-person { margin-top: 20px; padding-top: 20px; border-top: 1px solid #e2e7e4; }
+.owner-booking-person h3 { margin: 0 0 10px; color: #07513d; font-size: 16px; }
+.owner-booking-person p { margin: 6px 0; overflow-wrap: anywhere; }
+.owner-booking-actions { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 16px; }
+.owner-booking-actions .account-button { margin: 0; font-size: 12px; }
+.booking-message-dialog { width: min(90vw, 480px); }
+.booking-message-dialog .account-status { line-height: 1.6; overflow-wrap: anywhere; }
+#owner-settings { display: grid; gap: 24px; }
+.owner-form-field { min-width: 0; }
+#landowner-panel .owner-form-field .checkout-label { margin: 0 0 8px; line-height: 1.5; }
+#owner-settings > .owner-photo-editor { margin: 0; }
+#landowner-panel #owner-settings > .recipient-option,
+#landowner-panel #owner-settings > .continue-button,
+#landowner-panel #owner-settings > [role="status"] { margin-top: 0; }
+@media (min-width: 1100px) {
+ #owner-settings { grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: 32px; }
+ #owner-settings > .owner-photo-editor,
+ #owner-settings > .recipient-option,
+ #owner-settings > .continue-button,
+ #owner-settings > [role="status"] { grid-column: 1 / -1; }
+ .owner-calendar-days { grid-auto-rows: minmax(clamp(84px, 7vw, 140px), auto); gap: 10px; }
+ .owner-calendar-day { align-content: center; gap: 12px; padding: 16px 8px; }
+ .owner-calendar-day strong { font-size: 20px; }
+ .owner-calendar-day span { font-size: 12px; }
+ .owner-calendar-weekdays { gap: 10px; font-size: 13px; }
+ .owner-booking-detail { position: sticky; top: 24px; max-height: calc(100dvh - 48px); overflow-y: auto; }
+}
+@media (max-width: 1050px) {
+ .owner-dashboard { grid-template-columns: 200px minmax(0, 1fr); }
+ .dashboard-main { padding: 0 24px 36px; }
+ .dashboard-metrics { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+ .dashboard-notice-grid { grid-template-columns: 1fr; }
+ .owner-calendar-layout { grid-template-columns: 1fr; }
+}
+@media (max-width: 700px) {
+ .portal-login { grid-template-columns: 1fr; }
+ .portal-introduction { padding: 24px; gap: 24px; }
+ .portal-introduction .dashboard-brand span { display: block; }
+ .portal-introduction-content { margin: 0; padding-top: 12px; }
+ .portal-river-photo { display: none; }
+ .portal-features { margin-top: 18px; }
+ .portal-introduction h1 { font-size: clamp(32px, 8vw, 44px); }
+ .portal-login-content { padding: 30px 20px 40px; }
+ .portal-section-label { margin-bottom: 18px; }
+ .portal-login-form { padding: 26px 22px; }
+ .owner-dashboard { display: block; }
+ .dashboard-sidebar { position: static; height: auto; padding: 20px 16px 16px; }
+ .dashboard-brand { padding: 0; font-size: 23px; }
+ .dashboard-brand span { display: none; }
+ .dashboard-estate { margin: 6px 0 18px; }
+ .dashboard-sidebar nav { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 6px; }
+ .dashboard-sidebar nav a { display: grid; align-items: center; padding: 12px 8px; text-align: center; font-size: 12px; }
+ .dashboard-sidebar-footer { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px; padding-top: 14px; }
+ .dashboard-sidebar-footer a, .dashboard-sidebar-footer button { padding: 8px 0; font-size: 12px; }
+ .dashboard-main { padding: 0 16px 32px; }
+ .dashboard-topbar { min-height: 64px; font-size: 12px; }
+ .dashboard-page-heading { margin: 26px 0 22px; }
+ .dashboard-zone-grid { grid-template-columns: 1fr; gap: 16px; }
+ .dashboard-metrics { gap: 12px; margin-bottom: 28px; }
+ .dashboard-metric { padding: 18px 16px; }
+ .dashboard-card { padding: 22px 18px; }
+}

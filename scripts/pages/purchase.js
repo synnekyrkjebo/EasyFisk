@@ -1,5 +1,7 @@
 import {renderZoneInformation} from '../shared/zone-information.js';
 import { addDays, firstBookableDay, monthDays, exampleAvailability } from "../shared/purchase-calendar.js";
+import {isSalesClosed} from '../shared/landowner-store.js';
+import {zoneDetails} from '../shared/zone-details.js';
 import { readBooking, bookingUrl } from "../shared/booking.js";
 
 const placeSelect = document.querySelector("#place-select");
@@ -96,6 +98,7 @@ function renderCalendar() {
   }
   for (const key of dates) {
     const { total, booked, remaining } = availability(key);
+    const closed=!searchMode&&isSalesClosed(placeSelect.value,key);
     const expired = key < firstBookableDay();
     const selected = selectedDates.has(key);
     const insufficient = remaining > 0 && remaining < requiredPlaces();
@@ -105,14 +108,14 @@ function renderCalendar() {
     button.className = `calendar-day${!remaining ? " is-full" : ""}${insufficient ? " is-insufficient" : ""}${expired ? " is-past" : ""}${selected ? " is-selected" : ""}`;
     button.disabled = expired || remaining < requiredPlaces();
     button.setAttribute("aria-pressed", String(selected));
-    button.setAttribute("aria-label", `${longDate.format(asDate(key))}, ${booked} av ${total} plasser tatt, ${expired ? "passert" : !remaining ? "fullt" : insufficient ? `${remaining} ledige, for få plasser til ${requiredPlaces()} fiskere` : `${remaining} ledige`}`);
+    button.setAttribute("aria-label", `${longDate.format(asDate(key))}, ${booked} av ${total} plasser tatt, ${expired ? "passert" : closed ? "stengt for kortkjøp" : !remaining ? "fullt" : insufficient ? `${remaining} ledige, for få plasser til ${requiredPlaces()} fiskere` : `${remaining} ledige`}`);
     if (searchMode) button.setAttribute("aria-label", `${longDate.format(asDate(key))}${expired ? ", passert" : ""}`);
     const day = document.createElement("span");
     day.className = "day-number";
     day.textContent = String(Number(key.slice(-2)));
     const count = document.createElement("span");
     count.className = "day-capacity";
-    count.textContent = searchMode ? "" : expired ? "–" : `${booked}/${total}`;
+    count.textContent = searchMode ? "" : expired ? "–" : closed ? "Stengt" : `${booked}/${total}`;
     button.append(day, count);
     button.addEventListener("click", () => toggleDay(key));
     calendar.append(button);
@@ -228,7 +231,8 @@ function renderResults() {
   for (const place of available) {
     const card = document.createElement("article");
     card.className = "zone-result-card";
-    const photo = inaturOffers[place.name]?.[0]?.images?.[0];
+    const details=zoneDetails(place.name);
+    const photo = details.images===undefined?inaturOffers[place.name]?.[0]?.images?.[0]:details.images[0];
     if (photo) {
       const image = document.createElement("img");
       image.src = photo.src;

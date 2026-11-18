@@ -155,9 +155,9 @@ if (!booking) {
       const url = new URL("fiskekort.html", window.location.href);
       url.searchParams.set("bestilt", id);
       window.location.assign(url.href);
-    } catch {
+    } catch (error) {
       submitting = false;
-      status.textContent = "Kunne ikke bestille. Sjekk at du er logget inn, og at hver fisker har navn og en egen gyldig e-post.";
+      status.textContent = error.message?.startsWith('Kortsalget er stengt')?error.message:"Kunne ikke bestille. Sjekk at du er logget inn, og at hver fisker har navn og en egen gyldig e-post.";
       paymentButton.disabled = !acceptRules.checked;
     }
   });

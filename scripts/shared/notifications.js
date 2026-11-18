@@ -1,4 +1,4 @@
-import {landownerNotices,NOTICES_KEY} from './landowner-store.js';
+import {visibleLandownerNotices,NOTICES_KEY} from './landowner-store.js';
 import {getCurrentUser} from './auth.js';
 import {noticeKey,unreadNotices,readNoticeKeys} from './notification-state.js';
 
@@ -9,8 +9,8 @@ const initialNotices = [
 
 const trigger=document.querySelector('button[aria-label="Varsler"]');
 async function initializeNotifications(trigger){
- let notices=[...landownerNotices(),...initialNotices];
  const user=await getCurrentUser();
+ let notices=[...visibleLandownerNotices(user),...initialNotices];
  const readKey=`easyfisk.notifications.read:${user?.email?.toLowerCase()||'guest'}`;
  const dot=document.createElement('span');dot.className='notification-dot';dot.setAttribute('aria-hidden','true');trigger.classList.add('notification-trigger');trigger.append(dot);
  let read=[];
@@ -38,7 +38,7 @@ async function initializeNotifications(trigger){
   item.append(sender,title,text);list.append(item);
  }
  }
- function updateNotices(){notices=[...landownerNotices(),...initialNotices];renderNotices();refreshUnread();}
+ function updateNotices(){notices=[...visibleLandownerNotices(user),...initialNotices];renderNotices();refreshUnread();}
  renderNotices();
  const close=document.createElement('button');close.type='button';close.className='account-button dialog-cancel';close.textContent='Lukk';close.addEventListener('click',()=>dialog.close());
  dialog.append(heading,status,list,close);document.body.append(dialog);

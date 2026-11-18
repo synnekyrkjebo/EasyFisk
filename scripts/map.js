@@ -1,4 +1,5 @@
 import {renderZoneInformation} from './shared/zone-information.js';
+import {zoneDefaults} from './shared/zone-details.js';
 const zoneCard = document.querySelector("#zone-card");
 const closeCard = document.querySelector(".close-card");
 const readMoreButton = document.querySelector("#read-more-button");
@@ -18,6 +19,9 @@ function renderOffers(place) {
   const offers = inaturOffers[place.name];
   zoneOffers.replaceChildren();
   const ownerInfo=document.createElement('section');ownerInfo.className='owner-zone-information';zoneOffers.append(ownerInfo);renderZoneInformation(ownerInfo,place);
+  if(Object.keys(zoneDefaults(place.name)).length){
+    const source=document.createElement('a');source.href=offers[0].sourceUrl;source.target='_blank';source.rel='noopener noreferrer';source.textContent='Se opprinnelig informasjon på Inatur ↗';ownerInfo.append(source);return;
+  }
 
   offers.forEach((offer) => {
     const article = document.createElement("article");

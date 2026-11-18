@@ -19,8 +19,6 @@
     <main class="purchase-main">
       <h1 class="chosen-place">Logg inn</h1>
       <form class="selection-card" id="login-form">
-        <label class="checkout-label" for="login-role">Logg inn som</label>
-        <select class="checkout-input" id="login-role"><option value="fisher">Fisker</option><option value="landowner">Grunneier – Holmesland A, B, C og P</option></select>
         <dl class="profile-details">
           <div><dt>Navn</dt><dd id="demo-name"></dd></div>
           <div><dt>E-post</dt><dd id="demo-email"></dd></div>
@@ -30,9 +28,14 @@
         <p class="account-status" id="login-status" role="status"></p>
       </form>
       <a class="guest-return" id="signup-link" href="registrer.html">Opprett konto</a>
+      <section class="selection-card" aria-labelledby="owner-entry-heading">
+        <h2 id="owner-entry-heading">Er du grunneier?</h2>
+        <p class="account-status">Administrer Holmesland A, B, C og P i grunneierportalen.</p>
+        <a class="continue-button" href="grunneier-logginn.html">Logg inn som grunneier →</a>
+      </section>
     </main>
   </div>
-  <script type="module" src="../scripts/pages/login.js?v=20261112-5"></script>
+  <script type="module" src="../scripts/pages/login.js?v=20261112-8"></script>
   <script type="module" src="../scripts/shared/tooltips.js?v=20261112-1"></script>
 </body>
 </html>

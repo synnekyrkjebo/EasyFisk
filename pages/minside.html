@@ -28,28 +28,6 @@
     <main class="purchase-main">
       <a class="profile-back" id="profile-back" href="minside.html" hidden aria-label="Tilbake til min side"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m14 6-6 6 6 6M8 12h12"/></svg></a>
       <h1 class="chosen-place" id="profile-heading">Min side</h1>
-      <section class="community-section" id="landowner-panel" hidden>
-        <p class="place-label">Grunneier</p><h2>Mine soner og fiskekort</h2>
-        <label class="checkout-label" for="owner-place">Velg fiskeplass</label><select class="checkout-input" id="owner-place"></select>
-        <form id="owner-settings">
-          <label class="checkout-label" for="owner-description">Om fiskeplassen</label><textarea class="checkout-input" id="owner-description" rows="4" maxlength="2000"></textarea>
-          <label class="checkout-label" for="owner-cardTitle">Navn på fiskekort</label><input class="checkout-input" id="owner-cardTitle" maxlength="120" required>
-          <label class="checkout-label" for="owner-cardInfo">Informasjon om fiskekortet</label><textarea class="checkout-input" id="owner-cardInfo" rows="3" maxlength="2000"></textarea>
-          <label class="checkout-label" for="owner-price">Pris per person per fiskedøgn (kr)</label><input class="checkout-input" id="owner-price" type="number" min="0" step="0.01">
-          <label class="checkout-label" for="owner-capacity">Antall kort per fiskedøgn</label><input class="checkout-input" id="owner-capacity" type="number" min="1" max="100" required>
-          <label class="checkout-label" for="owner-rules">Lokale fiskeregler og praktisk informasjon</label><textarea class="checkout-input" id="owner-rules" rows="4" maxlength="2000"></textarea>
-          <label class="recipient-option"><input type="checkbox" id="owner-closed"> Steng for nye kortkjøp</label>
-          <button class="continue-button" type="submit">Lagre sone og fiskekort</button><p class="account-status" id="owner-save-status" role="status"></p>
-        </form>
-        <h2>Send varsel til fiskere</h2>
-        <p class="account-status">Varselet gjelder valgt fiskeplass og vises i varslingsbjella.</p>
-        <form id="owner-notice-form">
-          <label class="checkout-label" for="owner-notice-title">Overskrift</label><input class="checkout-input" id="owner-notice-title" maxlength="120" required>
-          <label class="checkout-label" for="owner-notice-text">Melding</label><textarea class="checkout-input" id="owner-notice-text" rows="4" maxlength="2000" required></textarea>
-          <button class="continue-button" type="submit">Publiser varsel</button><p class="account-status" id="owner-notice-status" role="status"></p>
-        </form>
-        <h3>Publiserte varsler</h3><div id="owner-published"></div>
-      </section>
       <section class="selection-card" id="profile-guest" hidden>
         <h2>Vil du logge inn eller registrere deg?</h2>
         <p class="account-status">Logg inn for å se profilen og fiskekortene dine.</p>
@@ -61,7 +39,7 @@
           <button class="account-button owner-only" id="edit-profile" type="button">Rediger profil</button>
           <a class="continue-button owner-only" href="statistikk.html">Min statistikk</a>
           <div id="profile-follow-action"></div>
-          <p class="account-status" id="account-role"></p><a class="account-button owner-only" href="logginn.html?tilbake=minside.html">Bytt brukerrolle</a>
+          <p class="account-status" id="account-role"></p><a class="continue-button" id="owner-dashboard-link" href="grunneier.html" hidden>Åpne grunneierdashboard</a><a class="account-button owner-only" href="logginn.html?tilbake=minside.html">Bytt brukerrolle</a>
         </section>
         <div id="profile-private" class="feed-empty" hidden>Profilen er privat.</div>
         <div id="profile-details">
@@ -119,10 +97,9 @@
     <p class="account-status" id="profile-edit-status" role="status"></p><button class="continue-button" id="save-profile" type="submit">Lagre profil</button><button class="account-button dialog-cancel" id="cancel-profile" type="button">Avbryt</button>
   </form></dialog>
   <script src="../scripts/data/fishing-places.js?v=20261027-1"></script>
-  <script type="module" src="../scripts/pages/profile.js?v=20261112-5"></script>
-  <script type="module" src="../scripts/shared/landowner-panel.js?v=20261112-1"></script>
+  <script type="module" src="../scripts/pages/profile.js?v=20261112-6"></script>
   <script type="module" src="../scripts/shared/tooltips.js?v=20261112-1"></script>
-  <script type="module" src="../scripts/shared/notifications.js?v=20261112-3"></script>
+  <script type="module" src="../scripts/shared/notifications.js?v=20261112-4"></script>
   <script type="module" src="../scripts/shared/session-navigation.js?v=20261027-1"></script>
 </body>
 </html>
